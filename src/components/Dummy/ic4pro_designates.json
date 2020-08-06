@@ -1,0 +1,72 @@
+[
+  {
+  "designate_id":"HEADVAULT",
+    "designate_name":"Head Vault",
+    "operating_arena":"All",
+    "coverage_id":"ic4pro_all",
+    "superior_designate":"NONE",
+    "job_description":"",
+    "recordDate":"20200603",
+    "recordTime":"103040",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"2"
+},
+  {
+    "designate_id":"ICO",
+    "designate_name":"Internal Control Officer",
+    "operating_arena":"Branch",
+    "coverage_id":"ic4pro_branch",
+    "superior_designate":"NONE",
+    "job_description":"Handles all internal control related issues in the branch",
+    "recordDate":"20200603",
+    "recordTime":"103040",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"2"
+  },
+  {
+    "designate_id":"HEADTELLER",
+    "designate_name":"Head Teller",
+    "operating_arena":"Zone",
+    "coverage_id":"ic4pro_zone",
+    "superior_designate":"COO",
+    "job_description":"",
+    "recordDate":"20200603",
+    "recordTime":"103040",
+    "operator":"adroit",
+    "operation":"create",
+    "workstation":"11.20.10.1",
+    "recordCounter":"2"
+  },
+  {
+    "designate_id":"COO",
+    "designate_name":"Chief Operations Officer",
+    "operating_arena":"Region",
+    "coverage_id":"ic4pro_Region",
+    "superior_designate":"CEO",
+    "job_description":"",
+    "recordDate":"20200603",
+    "recordTime":"103040",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"2"
+  },
+  {
+    "designate_id":"CEO",
+    "designate_name":"Chief Executive Officer",
+    "operating_arena":"All",
+    "coverage_id":"ic4pro_all",
+    "superior_designate":"NONE",
+    "job_description":"",
+    "recordDate":"20200603",
+    "recordTime":"103040",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"2"
+  }
+]

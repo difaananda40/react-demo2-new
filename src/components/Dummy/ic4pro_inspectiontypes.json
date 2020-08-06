@@ -1,0 +1,45 @@
+[
+    {
+      "key":"Full",
+      "description":"Full Inspection",
+      "recordDate":"20200603",
+      "recordTime":"10:30:40",
+      "operator":"adroit",
+      "operation":"edit",
+      "workstation":"11.20.10.1",
+      "recordCounter":"1"
+      },
+      {
+      "key":"snapCheck",
+      "description":"Snap Check",
+      "recordDate":"20200603",
+      "recordTime":"10:30:40",
+      "operator":"adroit",
+      "operation":"edit",
+      "workstation":"11.20.10.1",
+      "recordCounter":"1"
+      },
+      {
+      "key":"Comprehensive",
+      "description":"Comprehensive",
+      "recordDate":"20200603",
+      "recordTime":"10:30:40",
+      "operator":"adroit",
+      "operation":"edit",
+      "workstation":"11.20.10.1",
+      "recordCounter":"1"
+      },
+      {
+      "key":"quantitative",
+      "description":"Quantitative",
+      "recordDate":"20200603",
+      "recordTime":"10:30:40",
+      "operator":"adroit",
+      "operation":"edit",
+      "workstation":"11.20.10.1",
+      "recordCounter":"1"
+      }
+  ]
+      
+  
+      

@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "branchId": "001",
+            "branchName": "First Branch"
+        },
+        {
+            "branchId": "002",
+            "branchName": "Second Branch"
+        }
+    ]
+}

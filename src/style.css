@@ -1,0 +1,35 @@
+.react-bootstrap-table table {
+  table-layout: auto;
+}
+
+.react-bootstrap-table table tr {
+  cursor: pointer;
+}
+
+.react-bootstrap-table-pagination {
+  margin-top: 20px;
+}
+
+.react-bootstrap-table-page-btns-ul {
+  float: right;
+}
+
+.modal-90w {
+  max-width: 90%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.custom-input-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.nav-tabs .nav-link {
+  background-color: #2196F3;
+  color: white;
+}

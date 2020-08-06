@@ -1,0 +1,551 @@
+[
+	{
+		"worksheetId": "WK2020071509316",
+		"branchId": "001",
+		"startMonth": "January",
+		"startYear": "2020",
+		"endMonth": "March",
+		"endYear": "2020",
+		"visitPeriodStart": "20200710",
+		"visitPeriodEnd": "20200715",
+		"exitMeetingDate": "20200715",
+		"inspectionType": "Full",
+		"lastAuditVisit": "WK2020071509316-Full",
+		"auditIntro": "This is very important report. The form has many tabs to click on with different button",
+	
+		"keyofficers": [{
+				"staffName": "otitiloye@test.com",
+				"gradelevel": "SMANAGER",
+				"designate": "BM",
+				"datejoin": "20100101",
+				"jobStayYear": "5",
+				"jobStayMonth": "07"
+			},
+			{
+				"staffName": "eoliseh@test.com",
+				"gradelevel": "MANAGER",
+				"designate": "HEADTELLER",
+				"datejoin": "20110621",
+				"jobStayYear": "0",
+				"jobStayMonth": "10"
+			}
+		],
+	
+		"auditTeam": [{
+				"auditorId": "young@test.com",
+				"auditorRole": "TEAMLEAD",
+				"specificCoverage": [{
+						"areaInspected": "COMPLIANCE"
+					},
+					{
+						"areaInspected": "INTERNALCONTROL"
+					},
+					{
+						"areaInspected": "RISKASSET"
+					}
+				]
+			},
+			{
+				"auditorId": "ayoadeleke@test.com",
+				"auditorRole": "MEMBER",
+				"specificCoverage": [{
+						"areaInspected": "CASH"
+					},
+					{
+						"areaInspected": "DEPOSIT"
+					}
+				]
+			}
+		],
+		"reviewers": [{
+				"reviewer": "femi.ademola@test.com",
+				"reviewerRole": "HEADAUDIT"
+			},
+			{
+				"reviewer": "yemi@test.com",
+				"reviewerRole": "GROUPAUDIT"
+			}
+		],
+		"approver": "ibkakin@test.com",
+		"approverRole": "CI",
+	
+		"auditObjectives": [{
+				"objectiveId": "ACCOUNTING"
+			},
+			{
+				"objectiveId": "TRANSACTION"
+			},
+			{
+				"objectiveId": "ADEQUATE"
+			}
+		],
+		"otherObjectives": "This is a Memo field that allows users to enter different things.",
+	
+		"approachDetail": "This is a memo field. A risk based audit approach ....",
+		"approaches": [{
+				"approach": "COMPLIANCE",
+				"approachPercent": 65.00
+			},
+			{
+				"approach": "INTERNALCONTROL",
+				"approachPercent": 45.00
+			}
+		],
+		"overallCoverage": "55.00",
+	
+		"financialHighLights": [{
+				"finCriteria": "PBT",
+				"finActual": "68757",
+				"finBudget": "11979",
+				"percentAchieved": "65.79",
+				"finLastAudit": "720"
+			},
+			{
+				"finCriteria": "Risk Asset",
+				"finActual": "657",
+				"finBudget": "93079",
+				"percentAchieved": "71.00",
+				"finLastAudit": "15.630"
+			},
+			{
+				"finCriteria": "Deposit",
+				"finActual": "15678757",
+				"finBudget": "712379",
+				"percentAchieved": "57.90",
+				"finLastAudit": "19.20"
+			}
+		],
+		"sources": [{
+				"sourceName": "MPR & GL",
+				"sourceDate": "20200102",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters,"
+			},
+			{
+				"sourceName": "MOODY",
+				"sourceDate": "20200310",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters"
+			}
+		],
+	
+		"previousRating": "66",
+		"previoustRatingGrade": "B",
+		"previousInterpretation": "Needs Improvement",
+		"branchRatings": [{
+				"branchUnit": "Credit",
+				"unitScore": "70",
+				"unitGrade": "A",
+				"interpretation": "Improved"
+			},
+			{
+				"branchUnit": "Operations",
+				"unitScore": "40",
+				"unitGrade": "C",
+				"interpretation": "Not Satisfactory"
+			},
+			{
+				"branchUnit": "Compliance",
+				"unitScore": "66",
+				"unitGrade": "B",
+				"interpretation": "Needs Improvement"
+			}
+		],
+		"currentRating": "55",
+		"currentRatingGrade": "B",
+		"currentInterpretation": "Needs Improvement",
+	
+		"auditOpinion": "This a field memo for free text. It can take between 100 and 500 characters",
+		"attachments": [{
+				"evidenceDetail": "Customer file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715103001"
+			},
+			{
+				"evidenceDetail": "Paperwork file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715110201"
+			}
+		],
+	
+		"finalRecommendation": "No input at this stage",
+		"auditConclusion": "No input at this stage",
+		"worksheetStatus": "New",
+		"overdueDate": "20200720",
+	
+		"dateInitiated": "20200715084010",
+		"initiator": "otitiloye@test.com",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "Created",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+	{
+		"worksheetId": "WK2020071509317",
+		"branchId": "001",
+		"startMonth": "January",
+		"startYear": "2020",
+		"endMonth": "March",
+		"endYear": "2020",
+		"visitPeriodStart": "20200710",
+		"visitPeriodEnd": "20200715",
+		"exitMeetingDate": "20200715",
+		"inspectionType": "Full",
+		"lastAuditVisit": "WK2020071509317-Full",
+		"auditIntro": "This is very important report. The form has many tabs to click on with different button",
+	
+		"keyofficers": [{
+				"staffName": "otitiloye@test.com",
+				"gradelevel": "SMANAGER",
+				"designate": "BM",
+				"datejoin": "20100101",
+				"jobStayYear": "5",
+				"jobStayMonth": "07"
+			},
+			{
+				"staffName": "eoliseh@test.com",
+				"gradelevel": "MANAGER",
+				"designate": "HEADTELLER",
+				"datejoin": "20110621",
+				"jobStayYear": "0",
+				"jobStayMonth": "10"
+			}
+		],
+	
+		"auditTeam": [{
+				"auditorId": "young@test.com",
+				"auditorRole": "TEAMLEAD",
+				"specificCoverage": [{
+						"areaInspected": "COMPLIANCE"
+					},
+					{
+						"areaInspected": "INTERNALCONTROL"
+					},
+					{
+						"areaInspected": "RISKASSET"
+					}
+				]
+			},
+			{
+				"auditorId": "ayoadeleke@test.com",
+				"auditorRole": "MEMBER",
+				"specificCoverage": [{
+						"areaInspected": "CASH"
+					},
+					{
+						"areaInspected": "DEPOSIT"
+					}
+				]
+			}
+		],
+		"reviewers": [{
+				"reviewer": "femi.ademola@test.com",
+				"reviewerRole": "HEADAUDIT"
+			},
+			{
+				"reviewer": "yemi@test.com",
+				"reviewerRole": "GROUPAUDIT"
+			}
+		],
+		"approver": "ibkakin@test.com",
+		"approverRole": "CI",
+	
+		"auditObjectives": [{
+				"objectiveId": "ACCOUNTING"
+			},
+			{
+				"objectiveId": "TRANSACTION"
+			},
+			{
+				"objectiveId": "ADEQUATE"
+			}
+		],
+		"otherObjectives": "This is a Memo field that allows users to enter different things.",
+	
+		"approachDetail": "This is a memo field. A risk based audit approach ....",
+		"approaches": [{
+				"approach": "COMPLIANCE",
+				"approachPercent": 65.00
+			},
+			{
+				"approach": "INTERNALCONTROL",
+				"approachPercent": 45.00
+			}
+		],
+		"overallCoverage": "55.00",
+	
+		"financialHighLights": [{
+				"finCriteria": "PBT",
+				"finActual": "68757",
+				"finBudget": "11979",
+				"percentAchieved": "65.79",
+				"finLastAudit": "720"
+			},
+			{
+				"finCriteria": "Risk Asset",
+				"finActual": "657",
+				"finBudget": "93079",
+				"percentAchieved": "71.00",
+				"finLastAudit": "15.630"
+			},
+			{
+				"finCriteria": "Deposit",
+				"finActual": "15678757",
+				"finBudget": "712379",
+				"percentAchieved": "57.90",
+				"finLastAudit": "19.20"
+			}
+		],
+		"sources": [{
+				"sourceName": "MPR & GL",
+				"sourceDate": "20200102",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters,"
+			},
+			{
+				"sourceName": "MOODY",
+				"sourceDate": "20200310",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters"
+			}
+		],
+	
+		"previousRating": "66",
+		"previoustRatingGrade": "B",
+		"previousInterpretation": "Needs Improvement",
+		"branchRatings": [{
+				"branchUnit": "Credit",
+				"unitScore": "70",
+				"unitGrade": "A",
+				"interpretation": "Improved"
+			},
+			{
+				"branchUnit": "Operations",
+				"unitScore": "40",
+				"unitGrade": "C",
+				"interpretation": "Not Satisfactory"
+			},
+			{
+				"branchUnit": "Compliance",
+				"unitScore": "66",
+				"unitGrade": "B",
+				"interpretation": "Needs Improvement"
+			}
+		],
+		"currentRating": "55",
+		"currentRatingGrade": "B",
+		"currentInterpretation": "Needs Improvement",
+	
+		"auditOpinion": "This a field memo for free text. It can take between 100 and 500 characters",
+		"attachments": [{
+				"evidenceDetail": "Customer file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715103001"
+			},
+			{
+				"evidenceDetail": "Paperwork file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715110201"
+			}
+		],
+	
+		"finalRecommendation": "No input at this stage",
+		"auditConclusion": "No input at this stage",
+		"worksheetStatus": "New",
+		"overdueDate": "20200720",
+	
+		"dateInitiated": "20200715084010",
+		"initiator": "otitiloye@test.com",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "Created",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+	{
+		"worksheetId": "WK2020080309317",
+		"branchId": "002",
+		"startMonth": "June",
+		"startYear": "2020",
+		"endMonth": "August",
+		"endYear": "2020",
+		"visitPeriodStart": "20200710",
+		"visitPeriodEnd": "20200715",
+		"exitMeetingDate": "20200715",
+		"inspectionType": "Full",
+		"lastAuditVisit": "WK2020080309317-Full",
+		"auditIntro": "This is very important report. The form has many tabs to click on with different button",
+	
+		"keyofficers": [{
+				"staffName": "otitiloye@test.com",
+				"gradelevel": "SMANAGER",
+				"designate": "BM",
+				"datejoin": "20100101",
+				"jobStayYear": "5",
+				"jobStayMonth": "07"
+			},
+			{
+				"staffName": "eoliseh@test.com",
+				"gradelevel": "MANAGER",
+				"designate": "HEADTELLER",
+				"datejoin": "20110621",
+				"jobStayYear": "0",
+				"jobStayMonth": "10"
+			}
+		],
+	
+		"auditTeam": [{
+				"auditorId": "young@test.com",
+				"auditorRole": "TEAMLEAD",
+				"specificCoverage": [{
+						"areaInspected": "COMPLIANCE"
+					},
+					{
+						"areaInspected": "INTERNALCONTROL"
+					},
+					{
+						"areaInspected": "RISKASSET"
+					}
+				]
+			},
+			{
+				"auditorId": "ayoadeleke@test.com",
+				"auditorRole": "MEMBER",
+				"specificCoverage": [{
+						"areaInspected": "CASH"
+					},
+					{
+						"areaInspected": "DEPOSIT"
+					}
+				]
+			}
+		],
+		"reviewers": [{
+				"reviewer": "femi.ademola@test.com",
+				"reviewerRole": "HEADAUDIT"
+			},
+			{
+				"reviewer": "yemi@test.com",
+				"reviewerRole": "GROUPAUDIT"
+			}
+		],
+		"approver": "ibkakin@test.com",
+		"approverRole": "CI",
+	
+		"auditObjectives": [{
+				"objectiveId": "ACCOUNTING"
+			},
+			{
+				"objectiveId": "TRANSACTION"
+			},
+			{
+				"objectiveId": "ADEQUATE"
+			}
+		],
+		"otherObjectives": "This is a Memo field that allows users to enter different things.",
+	
+		"approachDetail": "This is a memo field. A risk based audit approach ....",
+		"approaches": [{
+				"approach": "COMPLIANCE",
+				"approachPercent": 65.00
+			},
+			{
+				"approach": "INTERNALCONTROL",
+				"approachPercent": 45.00
+			}
+		],
+		"overallCoverage": "55.00",
+	
+		"financialHighLights": [{
+				"finCriteria": "PBT",
+				"finActual": "68757",
+				"finBudget": "11979",
+				"percentAchieved": "65.79",
+				"finLastAudit": "720"
+			},
+			{
+				"finCriteria": "Risk Asset",
+				"finActual": "657",
+				"finBudget": "93079",
+				"percentAchieved": "71.00",
+				"finLastAudit": "15.630"
+			},
+			{
+				"finCriteria": "Deposit",
+				"finActual": "15678757",
+				"finBudget": "712379",
+				"percentAchieved": "57.90",
+				"finLastAudit": "19.20"
+			}
+		],
+		"sources": [{
+				"sourceName": "MPR & GL",
+				"sourceDate": "20200102",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters,"
+			},
+			{
+				"sourceName": "MOODY",
+				"sourceDate": "20200310",
+				"finHighlights": "This a memo field that can take btw 200 and 5000 characters"
+			}
+		],
+	
+		"previousRating": "66",
+		"previoustRatingGrade": "B",
+		"previousInterpretation": "Needs Improvement",
+		"branchRatings": [{
+				"branchUnit": "Credit",
+				"unitScore": "70",
+				"unitGrade": "A",
+				"interpretation": "Improved"
+			},
+			{
+				"branchUnit": "Operations",
+				"unitScore": "40",
+				"unitGrade": "C",
+				"interpretation": "Not Satisfactory"
+			},
+			{
+				"branchUnit": "Compliance",
+				"unitScore": "66",
+				"unitGrade": "B",
+				"interpretation": "Needs Improvement"
+			}
+		],
+		"currentRating": "55",
+		"currentRatingGrade": "B",
+		"currentInterpretation": "Needs Improvement",
+	
+		"auditOpinion": "This a field memo for free text. It can take between 100 and 500 characters",
+		"attachments": [{
+				"evidenceDetail": "Customer file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715103001"
+			},
+			{
+				"evidenceDetail": "Paperwork file",
+				"attachments": "this for file attachment",
+				"attachedBy": "oseni.titiloye@mytext.com",
+				"dateTime": "20200715110201"
+			}
+		],
+	
+		"finalRecommendation": "No input at this stage",
+		"auditConclusion": "No input at this stage",
+		"worksheetStatus": "New",
+		"overdueDate": "20200720",
+	
+		"dateInitiated": "20200715084010",
+		"initiator": "otitiloye@test.com",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "Created",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	}
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "colourId":"RED",
+	"RGB":"FF0000" 
+  },
+   {
+    "colourId":"BLUE",
+	"RGB":"0000FF"
+  },
+   {
+    "colourId":"GREEN",
+	"RGB":"009900"
+  },
+   {
+    "colourId":"YELLOW",
+	"RGB":"FFFF00"
+  },
+   {
+    "colourId":"GOLD",
+	"RGB":"FFFF99"
+  },
+   {
+    "colourId":"ORANGE",
+	"RGB":"FF8800"
+  },
+   {
+    "colourId":"LIGHT-GREEN",
+	"RGB":"33FF33"
+  },
+   {
+    "colourId":"LIGHT-BLUE",
+	"RGB":"66B2FF"
+  },
+   {
+    "colourId":"TORQUIOSE",
+	"RGB":"66FFFF"
+  },
+     {
+    "colourId":"LIGHT-ORANGE",
+	"RGB":"CC6600"
+  }
+
+  ]
+  

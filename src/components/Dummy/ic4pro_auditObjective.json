@@ -1,0 +1,62 @@
+﻿[
+  {
+    "key":"ACCOUNTING",
+    "description":"Proper accounting and internal control systems exist within the Branch.",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"TRANSACTION",
+    "description":"Transactions of the Branch are processed in line with the Bank’s accounting and internal control systems.",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"ADEQUATE",
+    "description":"Proper and adequate records are in place to record transactions of the Branch.",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"branchComplianceWithManagementPolicies",
+    "description":"Extent of the Branch’s compliance with management policies and procedures as well as regulations and best practice.",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"complianceInLineWithBankPolicy",
+    "description":"Compliance is in line with the Bank’s policy on expenditure control.",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"properControlProcedures",
+    "description":"Proper control procedures are instituted as far as is necessarily possible to safeguard the Bank’s assets, prevent and detect frauds, errors and other irregularities",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    }
+]

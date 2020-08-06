@@ -1,0 +1,279 @@
+[{
+		"key": "New",
+		"description": "NEW",
+		"defaultMessage": "memo",
+		"notifiers": [{
+				"notifierId": "initiator"
+			},
+			{
+				"notifierId": "keyOfficer"
+			}
+		],
+		"otherNotifiers": [{
+				"otherNotifier": "loye@test.com"
+			},
+			{
+				"otherNotifier": "joy@test.com"
+			}
+		],
+		"nextLevel": [{
+				"status": "InProgress"
+			},
+			{
+				"status": "Cancelled"
+			}
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "initiator"
+		}],
+
+		"workflowColour": "RED",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "3",
+		"overdueMessage": "Overdue please attend to this message",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "Reviewed",
+		"description": "REVIEWED",
+		"defaultMessage": "This is to review the in-progress messages",
+		"notifiers": [{
+			"notifierId": "initiator"
+		}],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+				"status": "InProgress"
+			},
+			{
+				"status": "Recommended"
+			}
+
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "initiator"
+		}],
+		"workflowColour": "GOLD",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "5",
+		"overdueMessage": "The memo is good for review",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "InProgress",
+		"description": "IN-PROGRESS",
+		"defaultMessage": "In progress message",
+		"notifiers": [{
+			"notifierId": "keyOfficers"
+		}],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+			"status": "Reviewed"
+		},{
+			"status": "New"
+		}],
+		"nextLevelChangers": [{
+			"statusChanger": "initiator"
+		}],
+		"workflowColour": "YELLOW",
+		"editFunction": "NO",
+		"deleteFunction": "NO",
+		"overdue": "10",
+		"overdueMessage": "This is in-progress message",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "Cancelled",
+		"description": "CANCELLED",
+		"defaultMessage": "memo",
+		"notifiers": [{
+			"notifierId": "auditTeam"
+		}],
+		"otherNotifiers": [{
+			"otherNotifier": "loye@test.com"
+		}],
+		"nextLevel": [{
+				"status": "New"
+			},
+			{
+				"status": "Inprogress"
+			}
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "initiator"
+		}],
+		"workflowColour": "LIGHT-BLUE",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "5",
+		"overdueMessage": "",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "ApprovalNeeded",
+		"description": "APPROVAL-NEEDED",
+		"defaultMessage": "Approval needed",
+		"notifiers": [{
+			"notifierId": "reviewers"
+		}],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+				"status": "Approved"
+			},
+			{
+				"status": "Recommended"
+			}
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "inititator"
+		}],
+		"workflowColour": "LIGHT-GREEN",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "10",
+		"overdueMessage": "memo",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "Recommended",
+		"description": "RECOMMENDED",
+		"defaultMessage": "memo",
+		"notifiers": [{
+				"notifierId": "auditTeam"
+			},
+			{
+				"notifierId": "keyOfficers"
+			}
+		],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+				"status": "ApprovalNeeded"
+			},
+			{
+				"status": "Reviewed"
+			}
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "keyofficers"
+		}],
+
+		"workflowColour": "LIGHT-ORANGE",
+		"editFunction": "NO",
+		"deleteFunction": "YES",
+		"overdue": "5",
+		"overdueMessage": "memo",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+	{
+		"key": "Approved",
+		"description": "APPROVED",
+		"defaultMessage": "Approval messages",
+		"notifiers": [{
+				"notifierId": "reviewers"
+			},
+			{
+				"notifierId": "initiator"
+			},
+			{
+				"notifierId": "keyOfficers"
+			}
+		],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+				"status": "Closed"
+			},
+			{
+				"status": "ApprovalNeeded"
+			}
+		],
+		"nextLevelChangers": [{
+			"statusChanger": "approver"
+		}],
+		"workflowColour": "GREEN",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "10",
+		"overdueMessage": "memo",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	},
+
+	{
+		"key": "Closed",
+		"description": "CLOSED",
+		"defaultMessage": "Memo",
+		"notifiers": [{
+			"notifierId": "initiator"
+		}],
+		"otherNotifiers": [{
+			"otherNotifier": ""
+		}],
+		"nextLevel": [{
+			"status": ""
+		}],
+		"nextLevelChangers": [{
+			"statusChanger": "reviewer"
+		}],
+		"workflowColour": "BLUE",
+		"editFunction": "YES",
+		"deleteFunction": "YES",
+		"overdue": "30",
+		"overdueMessage": "memo",
+		"recordDate": "20200603",
+		"recordTime": "10:30:40",
+		"operator": "adroit",
+		"operation": "edit",
+		"workstation": "11.20.10.1",
+		"recordCounter": "1"
+	}
+]

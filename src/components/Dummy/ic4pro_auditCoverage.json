@@ -1,0 +1,115 @@
+[
+  {
+    "key":"lastAudit",
+    "description":"Review of Compliance with last Audit",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"INTERNALCONTROL",
+    "description":"Internal Control Review",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"CASH",
+    "description":"Cash and Teller Operations Review",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"RISKASSET",
+    "description":"Risk Assets Review",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"DEPOSIT",
+    "description":"Deposit Liability Review",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"clearingFundsTransfer",
+    "description":"Review of Clearing and Funds Transfer Activities",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {	
+    "key":"expenses",
+    "description":"Expenses Review",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"eBankingTransactions",
+    "description":"Review of E-Banking transactions",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"fixedAssets",
+    "description":"Review of Fixed Assets",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"generalAdministration",
+    "description":"Review of General Administration",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+    "key":"COMPLIANCE",
+    "description":"Review of General Administration",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    }
+]
+    
+
+    
