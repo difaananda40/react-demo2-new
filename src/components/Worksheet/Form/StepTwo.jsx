@@ -41,7 +41,7 @@ const StepTwo = () => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
-          keyOfficers: selectedData.keyofficers.map(sd => ({
+        keyOfficers: selectedData.keyofficers.map(sd => ({
           staffName: users.find(uj => uj.userid === sd.staffName),
           datejoin: moment(sd.datejoin, 'YYYYMMDD').toDate(),
           jobStayYear: years.find(y => y.value === parseInt(sd.jobStayYear)),
@@ -49,9 +49,20 @@ const StepTwo = () => {
         }))
       })
     }
-  }, [selectedData, reset, users, getValues])
+  }, [selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
+
+  // Disable selected option on next select
+  useEffect(() => {
+    if(watchKeyOfficers) {
+      setUsers(prevUsers => {
+        const newWatchKeyOfficers = watchKeyOfficers.map(ko => ko.staffName?.userid);
+        const newUsers = prevUsers?.map(u => ({ ...u, isDisabled: newWatchKeyOfficers.includes(u.userid) }))
+        return newUsers;
+      })
+    }
+  }, [watchKeyOfficers])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
@@ -99,16 +110,14 @@ const StepTwo = () => {
                 
                 </Row>
           {fields.map((item, index) => (
-            <>
             <Row key={item.id}>
               <Form.Group as={Col} sm="" controlId={`keyOfficers[${index}].staffName`}>
                 
                 <Controller
-                  id="keyofficer"
+                  // id="keyofficer"
                   name={`keyOfficers[${index}].staffName`}
                   as={Select}
                   options={users}
-                  hideSelectedOptions={false}
                   control={control}
                   getOptionValue={option => option.userid}
                   getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
@@ -120,7 +129,7 @@ const StepTwo = () => {
               <Form.Group as={Col} controlId={`keyOfficers[${index}].gradeLevel`}>
                 
                 <Form.Control 
-                id="gradelevel"
+                // id="gradelevel"
                 name={`keyOfficers[${index}].gradeLevel`} 
                 ref={register} 
                 readOnly 
@@ -185,8 +194,6 @@ const StepTwo = () => {
                 </Form.Group>
               )}
             </Row>
-            
-            </>
           ))}
           <Form.Group>
             <Button variant="primary" type="button" onClick={append}>Add Staff</Button>

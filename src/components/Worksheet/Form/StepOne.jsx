@@ -46,7 +46,7 @@ const StepOne = () => {
         auditIntro: selectedData.auditIntro
       })
     }
-  }, [selectedData, reset, getValues])
+  }, [selectedData])
 
   return (
     <Fragment>
