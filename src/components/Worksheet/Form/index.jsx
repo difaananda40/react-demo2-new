@@ -66,7 +66,7 @@ const FormContainer = ({
       endYear: data.endYear.auditYear,
       exitMeetingDate: moment(data.exitMeetingDate).format('YYYYMMDD'),
       inspectionType: data.inspectionType.key,
-      lastAuditVisit: data.lastAuditVisit.worksheetId,
+      lastAuditVisit: data.lastAuditVisit,
       overdueDate: moment().format('YYYYMMDD'),
       recordCounter: mode === 'create' ? 1 : mode === 'edit' && parseInt(data.recordCounter) + 1,
       recordDate: moment().format('YYYYMMDD'),

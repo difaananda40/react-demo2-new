@@ -5,7 +5,8 @@ import {
   Row,
   Col,
   Card,
-  Button
+  Button,
+  Modal
 } from 'react-bootstrap';
 import moment from 'moment';
 import Select from "../../Shared/Select";
@@ -17,8 +18,20 @@ import branches from '../../Dummy/ic4pro_branches.json';
 import months from '../../Dummy/ic4pro_auditMonths.json';
 import years from '../../Dummy/ic4pro_auditYears.json';
 import inspectionTypes from '../../Dummy/ic4pro_inspectiontypes.json';
+import designatesJson from '../../Dummy/ic4pro_designates.json';
 
 const StepOne = () => {
+
+  // Modal Last Audit Detail
+  const [ show, setShow ] = useState(false);
+  const handleModal = () => setShow(prev => !prev);
+
+  const getDesignate = React.useCallback((designate) => {
+    const designateFind = designatesJson.find(de => de.designate_id === designate)
+    return designateFind?.designate_name;
+  }, []);
+  // End modal
+
   const { register, errors, control, setValue, getValues, reset, selectedData, mode } = useFormContext();
 
   const watchBranchId = useWatch({ name: 'branchId' });
@@ -27,8 +40,6 @@ const StepOne = () => {
     const newWorksheets = worksheets.filter(dt => dt.branchId === watchBranchId?.branchId)[0];
     return newWorksheets;
   }, [watchBranchId]);
-
-  const selectedBranch = React.useMemo(() => watchBranchId ? watchBranchId?.branchId + ' - ' + watchBranchId?.branchName : '', [watchBranchId])
 
   const selectedInspectionType = React.useMemo(() => inspectionTypes.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [worksheetsFiltered])
 
@@ -50,7 +61,7 @@ const StepOne = () => {
         visitPeriodEnd: moment(selectedData.visitPeriodEnd, 'YYYYMMDD').toDate(),
         exitMeetingDate: moment(selectedData.exitMeetingDate, 'YYYYMMDD').toDate(),
         inspectionType: inspectionTypes.find(it => it.key === selectedData.inspectionType),
-        lastAuditVisit: worksheetsFiltered.find(ws => ws.worksheetId === selectedData.worksheetId),
+        lastAuditVisit: worksheets.find(dt => dt.worksheetId === selectedData.worksheetId)[0],
         auditIntro: selectedData.auditIntro
       })
     }
@@ -263,34 +274,16 @@ const StepOne = () => {
               Last Audit Visit
             </Form.Label>
             <Col>
-              <Row>
-                <Col>
-                  <Form.Control
-                    type="text"
-                    defaultValue={worksheetsFiltered?.worksheetId}
-                    readOnly
-                  />
-                </Col>
-                <Col xs="auto">
-                  <Button variant="primary">Detail</Button>
-                </Col>
-              </Row>
-              <Row className="mt-2">
-                <Col>
-                  <Form.Control
-                    type="text"
-                    defaultValue={selectedBranch}
-                    readOnly
-                  />
-                </Col>
-                <Col>
-                  <Form.Control
-                    type="text"
-                    defaultValue={selectedInspectionType}
-                    readOnly
-                  />
-                </Col>
-              </Row>
+              <Form.Control
+                type="text"
+                name="lastAuditVisit"
+                ref={register}
+                defaultValue={worksheetsFiltered?.worksheetId}
+                readOnly
+              />
+            </Col>
+            <Col xs="auto">
+              <Button variant="primary" onClick={handleModal} disabled={!worksheetsFiltered?.worksheetId}>Detail</Button>
             </Col>
           </Form.Group>
         </Card.Body>
@@ -315,6 +308,114 @@ const StepOne = () => {
           </Form.Group>
         </Card.Body>
       </Card>
+      <Modal
+        show={show}
+        onHide={handleModal}
+        keyboard={false}
+        size="lg"
+        centered
+      >
+        <Modal.Header style={{ backgroundColor: '#8C00FF' }}>
+          <Modal.Title className="text-capitalize text-light">
+            Detail of {worksheetsFiltered?.worksheetId}
+          </Modal.Title>
+          <Button
+            variant="success"
+            size="sm"
+            className="border border-white"
+            onClick={handleModal}
+          >
+            Cancel
+          </Button>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group as={Row} controlId="lastAuditWorksheetId">
+            <Form.Label column sm="4">
+              Worksheet Id
+            </Form.Label>
+            <Col>
+              <Form.Control
+                type="text"
+                defaultValue={worksheetsFiltered?.worksheetId}
+                readOnly
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="lastAuditInspectionType">
+            <Form.Label column sm="4">
+              Inspection Type
+            </Form.Label>
+            <Col>
+              <Form.Control
+                type="text"
+                defaultValue={selectedInspectionType}
+                readOnly
+              />
+            </Col>
+          </Form.Group>
+          <Row>
+            <Form.Label column sm="4">
+              Visit Period
+            </Form.Label>
+            <Col>
+              <Form.Control
+                type="text"
+                defaultValue={moment(worksheetsFiltered?.visitPeriodStart, 'YYYYMMMMDD').format('DD MMMM YYYY')}
+                readOnly
+              />
+            </Col>
+            <Col xs="auto" className="d-flex align-items-center font-weight-bold">to</Col>
+            <Col>
+              <Form.Control
+                type="text"
+                defaultValue={moment(worksheetsFiltered?.visitPeriodEnd, 'YYYYMMMMDD').format('DD MMMM YYYY')}
+                readOnly
+              />
+            </Col>
+          </Row>
+          <Card className="mt-3">
+            <Card.Header className="font-weight-bold" style={{ backgroundColor: '#FFC107' }}>
+              Key Officers
+            </Card.Header>
+            <Card.Body>
+            {worksheetsFiltered?.keyofficers.map((ko, index) => (
+              <Row key={index}>
+                <Form.Group as={Col} sm="" controlId={`lastAuditVisitKeyOfficersStaffName${index}`}>
+                  <Form.Label>
+                    Staff Name
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={ko.staffName}
+                    readOnly
+                  />
+                </Form.Group>
+                <Form.Group as={Col} sm="" controlId={`lastAuditVisitKeyOfficersGradeLevel${index}`}>
+                  <Form.Label>
+                    Grade Level
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={ko.gradelevel}
+                    readOnly
+                  />
+                </Form.Group>
+                <Form.Group as={Col} sm="" controlId={`lastAuditVisitKeyOfficersDesignate${index}`}>
+                  <Form.Label>
+                    Function
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={getDesignate(ko.designate)}
+                    readOnly
+                  />
+                </Form.Group>
+              </Row>
+            ))}
+            </Card.Body>
+          </Card>
+        </Modal.Body>
+      </Modal>
     </Fragment>
   )
 }
