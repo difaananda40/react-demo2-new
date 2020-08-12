@@ -4,7 +4,8 @@ import {
   Form,
   Row,
   Col,
-  Card
+  Card,
+  Button
 } from 'react-bootstrap';
 import moment from 'moment';
 import Select from "../../Shared/Select";
@@ -22,7 +23,14 @@ const StepOne = () => {
 
   const watchBranchId = useWatch({ name: 'branchId' });
 
-  const worksheetsFiltered = React.useMemo(() => worksheets.filter(dt => dt.branchId === watchBranchId?.branchId), [watchBranchId]);
+  const worksheetsFiltered = React.useMemo(() => {
+    const newWorksheets = worksheets.filter(dt => dt.branchId === watchBranchId?.branchId)[0];
+    return newWorksheets;
+  }, [watchBranchId]);
+
+  const selectedBranch = React.useMemo(() => watchBranchId ? watchBranchId?.branchId + ' - ' + watchBranchId?.branchName : '', [watchBranchId])
+
+  const selectedInspectionType = React.useMemo(() => inspectionTypes.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [worksheetsFiltered])
 
   useEffect(() => {
     if(mode === 'create') setValue('lastAuditVisit', '');
@@ -255,17 +263,34 @@ const StepOne = () => {
               Last Audit Visit
             </Form.Label>
             <Col>
-              <Controller
-                name="lastAuditVisit"
-                as={Select}
-                options={worksheetsFiltered}
-                control={control}
-                getOptionValue={option => option.worksheetId}
-                getOptionLabel={option => option.worksheetId + ' - ' + option.inspectionType}
-                placeholder="Last Audit Visit..."
-                isInvalid={errors.lastAuditVisit}
-                disabled={!watchBranchId || mode === 'view' || mode === 'delete'}
-              />
+              <Row>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    defaultValue={worksheetsFiltered?.worksheetId}
+                    readOnly
+                  />
+                </Col>
+                <Col xs="auto">
+                  <Button variant="primary">Detail</Button>
+                </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col>
+                  <Form.Control
+                    type="text"
+                    defaultValue={selectedBranch}
+                    readOnly
+                  />
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    defaultValue={selectedInspectionType}
+                    readOnly
+                  />
+                </Col>
+              </Row>
             </Col>
           </Form.Group>
         </Card.Body>
