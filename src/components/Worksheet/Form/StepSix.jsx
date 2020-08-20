@@ -14,10 +14,16 @@ import { getOperation } from '../../helper.js';
 // Data from JSON file
 import workflowsJson from '../../Dummy/ic4pro_auditworkflow.json';
 
-const StepSix = ({ mode }) => {
-  const { register, errors, control } = useFormContext();
+const StepSix = () => {
+  const { register, errors, control, setValue, mode } = useFormContext();
 
   const watchWorksheetStatus = useWatch({ name: 'worksheetStatus' });
+
+  useEffect(() => {
+    if(mode === 'create') {
+      setValue('worksheetStatus', workflowsJson.find(wf => wf.key === 'New'))
+    }
+  }, [mode, setValue])
 
   return (
     <Fragment>

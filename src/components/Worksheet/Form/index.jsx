@@ -38,9 +38,11 @@ const FormContainer = ({
   const { reset, ...methods } = useForm();
 
   useEffect(() => {
-    reset();
+    if(mode === 'create') {
+      reset();
+    }
     setTabKey('tab1');
-  }, [mode])
+  }, [mode, reset])
 
   const onSubmit = data => {
     const newData = {
@@ -93,7 +95,7 @@ const FormContainer = ({
       keyboard={false}
       dialogClassName="modal-90w"
     >
-      <FormProvider {...methods} reset={reset} selectedData={selectedData}>
+      <FormProvider {...methods} reset={reset} selectedData={selectedData} mode={mode}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Modal.Header style={{ backgroundColor: '#8C00FF' }}>
             <Modal.Title className="text-capitalize">{mode} Worksheet</Modal.Title>
