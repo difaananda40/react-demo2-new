@@ -24,7 +24,7 @@ const months = new Array(10 + 1).fill().map((e,i) => {
 });
 
 const StepTwo = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, setValue } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -67,9 +67,17 @@ const StepTwo = () => {
   const watchBranchId = useWatch({ name: 'branchId' });
 
   useEffect(() => {
-    const branchId = watchBranchId
-    setUsers(prevUsers => prevUsers.filter(pu => pu.branchId === branchId))
-  }, [watchBranchId])
+    const branchId = watchBranchId?.branchId;
+    setUsers(usersJson.filter(pu => pu.branchId === branchId));
+    reset({
+      ...getValues(),
+      keyOfficers: [{}]
+    }, {
+      errors: true, // errors will not be reset 
+      dirtyFields: true, // dirtyFields will not be reset
+      isDirty: true, // dirty will not be reset
+    })
+  }, [append, getValues, reset, watchBranchId])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
