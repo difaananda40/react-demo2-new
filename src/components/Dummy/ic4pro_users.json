@@ -1,139 +1,154 @@
 [
-{
-    "userid":"joy@test.com",
-    "title":"Mrs",
-    "firstName":"Joy",
-    "lastNamme":"Adex",
-    "fullName":"Mrs Joy Adex",
-    "gradeLevel":"MANAGER",
-    "designate":"HEADVAULT"
-    },
     {
-    "userid":"loye@test.com",
-    "title":"Mr",
-    "firstName":"Loye",
-    "lastNamme":"Titi",
-    "fullName":"Mr Loye Titi",
-    "gradeLevel":"SMANAGER",
-    "designate":"BM"
-    },
-    {
-    "userid":"tayo@test.com",
-    "title":"Mr",
-    "firstName":"Tayo",
-    "lastNamme":"Victor",
-    "fullName":"Mr Tayo Victor",
-    "gradeLevel":"MANAGER",
-    "designate":"ICO"
-    },
-    {
-    "userid":"princess@test.com",
-    "title":"Mrs",
-    "firstName":"Tope",
-    "lastNamme":"Stone",
-    "fullName":"Mrs Tope Stone",
-    "gradeLevel":"MANAGER",
-    "designate":"BOM"
-    },
-    {
-    "userid":"young@test.com",
-    "title":"Mr",
-    "firstName":"Young",
-    "lastNamme":"Man",
-    "fullName":"Mr Young Man",
-    "gradeLevel":"MANAGER",
-    "designate":"TEAMLEAD"
-    },
-    {
-    "userid":"ade.salt@test.com",
-    "title":"Mr",
-    "firstName":"Ade",
-    "lastNamme":"Adeleke",
-    "fullName":"Mr Ade Salt",
-    "gradeLevel":"OFFICER",
-    "designate":"MEMBER"
-    },
-    {
-    "userid":"ayoadeleke@test.com",
-    "title":"Miss",
-    "firstName":"Ayo",
-    "lastNamme":"Adeleke",
-    "fullName":"Miss Ayo Adeleke",
-    "gradeLevel":"MANAGER",
-    "designate":"MEMBER"
-    },
-    {
-    "userid":"ibk@test.com",
-    "title":"Mr",
-    "firstName":"Ibk",
-    "lastNamme":"Samuel",
-    "fullName":"Mr Ibk Samuel",
-    "gradeLevel":"MANAGER",
-    "designate":"MEMBER"
-    },
-    {
-    "userid":"femi.ademola@test.com",
-    "title":"Mr",
-    "firstName":"Femi",
-    "lastNamme":"Ademola",
-    "fullName":"Mr Femi Ademola",
-    "gradeLevel":"GMANAGER",
-    "designate":"HEADAUDIT"
-    },
-    {
-    "userid":"yemi@test.com",
-    "title":"Mr",
-    "firstName":"Yemi",
-    "lastNamme":"Right",
-    "fullName":"Mr Yemi Right",
-    "gradeLevel":"GMANAGER",
-    "designate":"GROUPAUDIT"
-    },
-    {
-    "userid":"ibkakin@test.com",
-    "title":"Mr",
-    "firstName":"Ibk",
-    "lastNamme":"Akin",
-    "fullName":"Mr Ibk Akin",
-    "gradeLevel":"GMANAGER",
-    "designate":"CI"
-    },
-    {
-    "userid":"yemi.yak@test.com",
-    "title":"Mr",
-    "firstName":"Yemi",
-    "lastNamme":"Yak",
-    "fullName":"Mr Yemi Yak",
-    "gradeLevel":"CIO",
-    "designate":"CIO"
-    },
-    {
-    "userid":"trust@test.com",
-    "title":"Mr",
-    "firstName":"Trust",
-    "lastNamme":"Test",
-    "fullName":"Mr Trust Test",
-    "gradeLevel":"OFFICER",
-    "designate":"STAFF"
-    },
-    {
-    "userid":"otitiloye@test.com",
-    "title":"Mr",
-    "firstName":"Oseni",
-    "lastNamme":"Titiloye",
-    "fullName":"Mr Oseni Titiloye",
-    "gradeLevel":"GM",
-    "designate":"AUDITOR"
-    },
-    {
-    "userid":"eoliseh@test.com",
-    "title":"Mr",
-    "firstName":"Oliseh",
-    "lastNamme":"Obiajuru",
-    "fullName":"Mr Oliseh Obiajuru",
-    "gradeLevel":"COO",
-    "designate":"AUDITOR"
-    }
-]
-    
+        "branchId": "001",
+        "userid":"joy@test.com",
+        "title":"Mrs",
+        "firstName":"Joy",
+        "lastNamme":"Adex",
+        "fullName":"Mrs Joy Adex",
+        "gradeLevel":"MANAGER",
+        "designate":"HEADVAULT"
+        },
+        {
+        "branchId": "001",
+        "userid":"loye@test.com",
+        "title":"Mr",
+        "firstName":"Loye",
+        "lastNamme":"Titi",
+        "fullName":"Mr Loye Titi",
+        "gradeLevel":"SMANAGER",
+        "designate":"BM"
+        },
+        {
+        "branchId": "001",
+        "userid":"tayo@test.com",
+        "title":"Mr",
+        "firstName":"Tayo",
+        "lastNamme":"Victor",
+        "fullName":"Mr Tayo Victor",
+        "gradeLevel":"MANAGER",
+        "designate":"ICO"
+        },
+        {
+        "branchId": "001",
+        "userid":"princess@test.com",
+        "title":"Mrs",
+        "firstName":"Tope",
+        "lastNamme":"Stone",
+        "fullName":"Mrs Tope Stone",
+        "gradeLevel":"MANAGER",
+        "designate":"BOM"
+        },
+        {
+        "branchId": "001",
+        "userid":"young@test.com",
+        "title":"Mr",
+        "firstName":"Young",
+        "lastNamme":"Man",
+        "fullName":"Mr Young Man",
+        "gradeLevel":"MANAGER",
+        "designate":"TEAMLEAD"
+        },
+        {
+        "branchId": "001",
+        "userid":"ade.salt@test.com",
+        "title":"Mr",
+        "firstName":"Ade",
+        "lastNamme":"Adeleke",
+        "fullName":"Mr Ade Salt",
+        "gradeLevel":"OFFICER",
+        "designate":"MEMBER"
+        },
+        {
+        "branchId": "002",
+        "userid":"ayoadeleke@test.com",
+        "title":"Miss",
+        "firstName":"Ayo",
+        "lastNamme":"Adeleke",
+        "fullName":"Miss Ayo Adeleke",
+        "gradeLevel":"MANAGER",
+        "designate":"MEMBER"
+        },
+        {
+        "branchId": "001",
+        "userid":"ibk@test.com",
+        "title":"Mr",
+        "firstName":"Ibk",
+        "lastNamme":"Samuel",
+        "fullName":"Mr Ibk Samuel",
+        "gradeLevel":"MANAGER",
+        "designate":"MEMBER"
+        },
+        {
+        "branchId": "001",
+        "userid":"femi.ademola@test.com",
+        "title":"Mr",
+        "firstName":"Femi",
+        "lastNamme":"Ademola",
+        "fullName":"Mr Femi Ademola",
+        "gradeLevel":"GMANAGER",
+        "designate":"HEADAUDIT"
+        },
+        {
+        "branchId": "001",
+        "userid":"yemi@test.com",
+        "title":"Mr",
+        "firstName":"Yemi",
+        "lastNamme":"Right",
+        "fullName":"Mr Yemi Right",
+        "gradeLevel":"GMANAGER",
+        "designate":"GROUPAUDIT"
+        },
+        {
+        "branchId": "001",
+        "userid":"ibkakin@test.com",
+        "title":"Mr",
+        "firstName":"Ibk",
+        "lastNamme":"Akin",
+        "fullName":"Mr Ibk Akin",
+        "gradeLevel":"GMANAGER",
+        "designate":"CI"
+        },
+        {
+        "branchId": "001",
+        "userid":"yemi.yak@test.com",
+        "title":"Mr",
+        "firstName":"Yemi",
+        "lastNamme":"Yak",
+        "fullName":"Mr Yemi Yak",
+        "gradeLevel":"CIO",
+        "designate":"CIO"
+        },
+        {
+        "branchId": "002",
+        "userid":"trust@test.com",
+        "title":"Mr",
+        "firstName":"Trust",
+        "lastNamme":"Test",
+        "fullName":"Mr Trust Test",
+        "gradeLevel":"OFFICER",
+        "designate":"STAFF"
+        },
+        {
+        "branchId": "002",
+        "userid":"otitiloye@test.com",
+        "title":"Mr",
+        "firstName":"Oseni",
+        "lastNamme":"Titiloye",
+        "fullName":"Mr Oseni Titiloye",
+        "gradeLevel":"GM",
+        "designate":"AUDITOR"
+        },
+        {
+        "branchId": "002",
+        "userid":"eoliseh@test.com",
+        "title":"Mr",
+        "firstName":"Oliseh",
+        "lastNamme":"Obiajuru",
+        "fullName":"Mr Oliseh Obiajuru",
+        "gradeLevel":"COO",
+        "designate":"AUDITOR"
+        }
+    ]
         
+            

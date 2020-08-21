@@ -64,6 +64,13 @@ const StepTwo = () => {
     }
   }, [watchKeyOfficers])
 
+  const watchBranchId = useWatch({ name: 'branchId' });
+
+  useEffect(() => {
+    const branchId = watchBranchId
+    setUsers(prevUsers => prevUsers.filter(pu => pu.branchId === branchId))
+  }, [watchBranchId])
+
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
     return designateFind?.designate_name;
