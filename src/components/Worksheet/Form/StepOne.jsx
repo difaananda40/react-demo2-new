@@ -19,6 +19,7 @@ import months from '../../Dummy/ic4pro_auditMonths.json';
 import years from '../../Dummy/ic4pro_auditYears.json';
 import inspectionTypes from '../../Dummy/ic4pro_inspectiontypes.json';
 import designatesJson from '../../Dummy/ic4pro_designates.json';
+import usersJson from '../../Dummy/ic4pro_users.json';
 
 const StepOne = () => {
 
@@ -30,6 +31,11 @@ const StepOne = () => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
     return designateFind?.designate_name;
   }, []);
+
+  const getFullName = React.useCallback((staffName) => {
+    const user = usersJson.find(us => us.userid === staffName);
+    return `${user.title}. ${user.firstName} ${user.lastNamme}`;
+  }, [])
   // End modal
 
   const { register, errors, control, setValue, getValues, reset, selectedData, mode } = useFormContext();
@@ -386,7 +392,7 @@ const StepOne = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={ko.staffName}
+                    defaultValue={getFullName(ko.staffName)}
                     readOnly
                   />
                 </Form.Group>
