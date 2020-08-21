@@ -136,7 +136,7 @@ const FormContainer = ({
             </div>
           </Modal.Header>
           <Modal.Body style={{ backgroundColor: '#F2F2F2' }}>
-            <Tab.Container id="tab-controlled" activeKey={tabKey} onSelect={(key) => setTabKey(key)} unmountOnExit={true}>
+            <Tab.Container id="tab-controlled" activeKey={tabKey} onSelect={(key) => setTabKey(key)}>
               <Card>
                 <Card.Header>
                   <Nav variant="tabs">
