@@ -53,9 +53,22 @@ const StepThree = () => {
     }
   }, [selectedData, reset, users, getValues])
 
+  
   const watchAuditTeams = useWatch({ name: 'auditTeams' });
   const watchReviewers = useWatch({ name: 'reviewers' });
   const watchApprover = useWatch({ name: 'approver' });
+
+  // Disable selected option on next select
+  useEffect(() => {
+    if(watchAuditTeams) {    
+      setCoverages(prevCoverages => {
+        let selectedCoverages = [];
+        watchAuditTeams.forEach(wat => wat.coverages?.forEach(cv => selectedCoverages.push(cv.key)))
+        const newCoverages = prevCoverages?.map(cv => ({ ...cv, isDisabled: selectedCoverages.includes(cv.key) }))
+        return newCoverages;
+      })
+    }
+  }, [watchAuditTeams])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
@@ -117,6 +130,7 @@ const StepThree = () => {
                       rules={{ required: 'Inspection Area is required!' }}
                       isInvalid={errors.auditTeams?.[index]?.coverages}
                       isMulti
+                      hideSelectedOptions={false}
                     />
                   </Form.Group>
                 </Row>
