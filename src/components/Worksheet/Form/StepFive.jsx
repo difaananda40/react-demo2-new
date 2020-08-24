@@ -50,6 +50,14 @@ const StepFive = () => {
     }
   }, [selectedData, reset, getValues])
 
+  const getGrade = (percentage) => {
+    if(percentage >= 80 && percentage <= 100) return 'A';
+    else if(percentage >= 60 && percentage <= 79) return 'B';
+    else if(percentage >= 30 && percentage <= 59) return 'C';
+    else if(percentage <= 29) return 'Fail';
+    else return 'No grade';
+  }
+
   return (
     <Fragment>
       <Card>
@@ -76,7 +84,7 @@ const StepFive = () => {
         <Card.Body>
           {fields.map((item, index) => (
             <Row key={item.id}>
-              <Form.Group as={Col} controlId={`approaches[${index}].approach`}>
+              <Form.Group as={Col} xs="12" md="4" controlId={`approaches[${index}].approach`}>
                 <Form.Label>
                   Approach {index + 1}*
                 </Form.Label>
@@ -91,35 +99,42 @@ const StepFive = () => {
                   isInvalid={errors.approaches?.[index]?.approach}
                 />
               </Form.Group>
-              <Form.Group as={Col} controlId={`approaches[${index}].approachPercent`}>
+              <Form.Group as={Col} xs="12" md="4" controlId={`approaches[${index}].approachPercent`}>
                 <Form.Label>
                   Approach Percent*
                 </Form.Label>
-                <Controller 
-                  as={
-                    <Form.Control
-                      ref={register({
-                        required: 'Approach Percent is required!',
-                        min: {
-                          value: 0,
-                          message: 'Minimum value is 0!'
-                        },
-                        max: {
-                          value: 100,
-                          message: 'Max value is 100!'
-                        }
-                      })}
-                    />
-                  } 
-                  control={control} 
+                <Form.Control
                   type="number"
                   name={`approaches[${index}].approachPercent`}
                   isInvalid={errors.approaches?.[index]?.approachPercent}
                   placeholder="Approach Percent..."
+                  ref={register({
+                    required: 'Approach Percent is required!',
+                    min: {
+                      value: 0,
+                      message: 'Minimum value is 0!'
+                    },
+                    max: {
+                      value: 100,
+                      message: 'Max value is 100!'
+                    }
+                  })}
+                  defaultValue={item.approachPercent}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.approaches?.[index]?.approachPercent?.message}
                 </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} xs="12" md="auto" controlId={`approaches[${index}].approachGrade`}>
+                <Form.Label>
+                  Grade
+                </Form.Label>
+                <Form.Control
+                  name={`approaches[${index}].approachGrade`}
+                  ref={register} 
+                  readOnly
+                  value={getGrade(watchApproaches?.[index]?.approachPercent)}
+                />
               </Form.Group>
               {fields.length > 1 && (
                 <Form.Group as={Col} controlId={`approaches[${index}].delete`}
@@ -134,14 +149,22 @@ const StepFive = () => {
             <Button variant="primary" type="button" onClick={append}>Add Approach</Button>
           </Form.Group>
           <Form.Group as={Row} controlId="overallCoverage" className="mt-3">
-            <Form.Label column xs="auto">
+            <Form.Label column xs="2">
               Overall Coverage
             </Form.Label>
-            <Col>
+            <Col xs="6">
               <Form.Control
                 type="number"
                 name="overallCoverage"
                 defaultValue={overallCoverage}
+                readOnly
+              />
+            </Col>
+            <Col xs="4">
+              <Form.Control
+                name="overallCoverageGrade"
+                value={getGrade(overallCoverage)}
+                ref={register}
                 readOnly
               />
             </Col>
