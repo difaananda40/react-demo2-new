@@ -32,7 +32,7 @@ const StepFive = () => {
   useEffect(() => {
     if(watchApproaches) {
       const approachesCount = watchApproaches.length;
-      const approachesSum = watchApproaches.reduce((acc, curr) => acc + parseInt(curr.approachPercent || 0), 0)
+      const approachesSum = watchApproaches.reduce((acc, curr) => acc + parseFloat(curr.approachPercent || 0), 0)
       setOverallCoverage(approachesSum / approachesCount)
     }
   }, [watchApproaches])
@@ -44,7 +44,7 @@ const StepFive = () => {
         approachDetail: selectedData.approachDetail,
         approaches: selectedData.approaches.map(ap => ({
           approach: coveragesJson.find(cj => cj.key === ap.approach),
-          approachPercent: 100
+          approachPercent: ap.approachPercent
         }))
       })
     }
@@ -95,22 +95,27 @@ const StepFive = () => {
                 <Form.Label>
                   Approach Percent*
                 </Form.Label>
-                <Form.Control
+                <Controller 
+                  as={
+                    <Form.Control
+                      ref={register({
+                        required: 'Approach Percent is required!',
+                        min: {
+                          value: 0,
+                          message: 'Minimum value is 0!'
+                        },
+                        max: {
+                          value: 100,
+                          message: 'Max value is 100!'
+                        }
+                      })}
+                    />
+                  } 
+                  control={control} 
                   type="number"
                   name={`approaches[${index}].approachPercent`}
                   isInvalid={errors.approaches?.[index]?.approachPercent}
                   placeholder="Approach Percent..."
-                  ref={register({
-                    required: 'Approach Percent is required!',
-                    min: {
-                      value: 0,
-                      message: 'Minimum value is 0!'
-                    },
-                    max: {
-                      value: 100,
-                      message: 'Max value is 100!'
-                    }
-                  })}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.approaches?.[index]?.approachPercent?.message}
@@ -137,7 +142,6 @@ const StepFive = () => {
                 type="number"
                 name="overallCoverage"
                 defaultValue={overallCoverage}
-                ref={register}
                 readOnly
               />
             </Col>
