@@ -163,22 +163,22 @@ const FormContainer = ({
                 <Card.Body>
                   <Tab.Content>
                     <Suspense fallback={<div>Loading...</div>}>
-                      <Tab.Pane eventKey="tab1">
+                      <Tab.Pane eventKey="tab1" mountOnEnter={true}>
                         <StepOne />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab2">
+                      <Tab.Pane eventKey="tab2" mountOnEnter={true}>
                         <StepTwo />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab3">
+                      <Tab.Pane eventKey="tab3" mountOnEnter={true}>
                         <StepThree />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab4">
+                      <Tab.Pane eventKey="tab4" mountOnEnter={true}>
                         <StepFour />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab5">
+                      <Tab.Pane eventKey="tab5" mountOnEnter={true}>
                         <StepFive />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab6">
+                      <Tab.Pane eventKey="tab6" mountOnEnter={true}>
                         <StepSix />
                       </Tab.Pane>
                     </Suspense>
