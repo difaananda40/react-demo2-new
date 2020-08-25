@@ -51,6 +51,13 @@ const StepThree = () => {
         approver: users.find(uj => uj.userid === selectedData.approver)
       })
     }
+    else {
+      reset({
+        auditTeams: [{}],
+        reviewers: [{}],
+        approver: null
+      })
+    }
   }, [selectedData, reset, users, getValues])
 
   

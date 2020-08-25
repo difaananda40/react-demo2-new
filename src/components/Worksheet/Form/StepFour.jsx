@@ -32,6 +32,12 @@ const StepFour = () => {
         otherObjectives: selectedData.otherObjectives
       })
     }
+    else {
+      reset({
+        auditObjectives: [null],
+        otherObjectives: null
+      })
+    }
   }, [selectedData, reset, getValues])
 
   return (

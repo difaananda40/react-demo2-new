@@ -38,9 +38,6 @@ const FormContainer = ({
   const { reset, ...methods } = useForm();
 
   useEffect(() => {
-    if(mode === 'create') {
-      reset();
-    }
     setTabKey('tab1');
   }, [mode, reset])
 

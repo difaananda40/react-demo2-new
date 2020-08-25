@@ -49,6 +49,11 @@ const StepTwo = () => {
         }))
       })
     }
+    else {
+      reset({
+        keyOfficers: []
+      })
+    }
   }, [selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
@@ -69,7 +74,7 @@ const StepTwo = () => {
   useEffect(() => {
     const branchId = watchBranchId?.branchId;
     setUsers(usersJson.filter(pu => pu.branchId === branchId));
-    if(mode === 'create') {
+    return () => {
       reset({
         ...getValues(),
         keyOfficers: [{}]

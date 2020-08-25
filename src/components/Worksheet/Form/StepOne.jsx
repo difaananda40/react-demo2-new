@@ -42,16 +42,10 @@ const StepOne = () => {
 
   const watchBranchId = useWatch({ name: 'branchId' });
 
-  const worksheetsFiltered = React.useMemo(() => {
-    const newWorksheets = worksheets.filter(dt => dt.branchId === watchBranchId?.branchId)[0];
-    return newWorksheets;
-  }, [watchBranchId]);
+  const worksheetsFiltered = React.useMemo(() => worksheets.filter(dt => dt.branchId === watchBranchId?.branchId)[0]
+  , [watchBranchId]);
 
   const selectedInspectionType = React.useMemo(() => inspectionTypes.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [worksheetsFiltered])
-
-  useEffect(() => {
-    if(mode === 'create') setValue('lastAuditVisit', '');
-  }, [watchBranchId])
 
   useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
@@ -70,6 +64,20 @@ const StepOne = () => {
         lastAuditVisit: worksheets.find(dt => dt.worksheetId === selectedData.worksheetId)[0],
         auditIntro: selectedData.auditIntro
       })
+    }
+    else {
+      reset({
+        branchId: null,
+        startMonth: null,
+        startYear: null,
+        endMonth: null,
+        endYear: null,
+        visitPeriodStart: null,
+        visitPeriodEnd: null,
+        exitMeetingDate: null,
+        inspectionType: null,
+        lastAuditVisit: null
+      });
     }
   }, [selectedData])
 
@@ -114,6 +122,7 @@ const StepOne = () => {
                     rules={{ required: 'Branch name is required!' }}
                     isInvalid={errors.branchId}
                     disabled={mode === 'view' || mode === 'delete'}
+                    defaultValue=""
                   />
                 </Col>
               </Form.Group>
@@ -284,7 +293,7 @@ const StepOne = () => {
                 type="text"
                 name="lastAuditVisit"
                 ref={register}
-                defaultValue={worksheetsFiltered?.worksheetId}
+                value={worksheetsFiltered?.worksheetId || ''}
                 readOnly
               />
             </Col>

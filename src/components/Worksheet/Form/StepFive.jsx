@@ -48,6 +48,13 @@ const StepFive = () => {
         }))
       })
     }
+    else {
+
+      reset({
+        approachDetail: null,
+        approaches: [{}]
+      })
+    }
   }, [selectedData, reset, getValues])
 
   const getGrade = (percentage) => {
@@ -148,7 +155,7 @@ const StepFive = () => {
           <Form.Group>
             <Button variant="primary" type="button" onClick={append}>Add Approach</Button>
           </Form.Group>
-          <Form.Group as={Row} controlId="overallCoverage" className="mt-3">
+          <Form.Group as={Row} className="mt-3">
             <Form.Label column xs="2">
               Overall Coverage
             </Form.Label>
