@@ -69,14 +69,16 @@ const StepTwo = () => {
   useEffect(() => {
     const branchId = watchBranchId?.branchId;
     setUsers(usersJson.filter(pu => pu.branchId === branchId));
-    reset({
-      ...getValues(),
-      keyOfficers: [{}]
-    }, {
-      errors: true, // errors will not be reset 
-      dirtyFields: true, // dirtyFields will not be reset
-      isDirty: true, // dirty will not be reset
-    })
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        keyOfficers: [{}]
+      }, {
+        errors: true, // errors will not be reset 
+        dirtyFields: true, // dirtyFields will not be reset
+        isDirty: true, // dirty will not be reset
+      })
+    }
   }, [append, getValues, reset, watchBranchId])
 
   const getDesignate = useCallback((designate) => {
