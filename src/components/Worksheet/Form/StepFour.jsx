@@ -63,9 +63,10 @@ const StepFour = () => {
                   getOptionLabel={option => option.description}
                   rules={{ required: 'Objective is required!' }}
                   isInvalid={errors.auditObjectives?.[index]}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
               </Form.Group>
-              {fields.length > 1 && (
+              {(mode === 'create' || mode === 'edit') && fields.length > 1 && (
                 <Form.Group as={Col} controlId={`auditObjectives[${index}].delete`}
                   className="d-flex align-items-center justify-content-center" xs="auto"
                 >
@@ -74,9 +75,11 @@ const StepFour = () => {
               )}
             </Row>
           ))}
-          <Form.Group>
-            <Button variant="primary" type="button" onClick={append}>Add Objective</Button>
-          </Form.Group>
+          {(mode === 'create' || mode === 'edit') && (
+            <Form.Group>
+              <Button variant="primary" type="button" onClick={append}>Add Objective</Button>
+            </Form.Group>
+          )}
         </Card.Body>
       </Card>
       <Card className="mt-3">
@@ -92,6 +95,7 @@ const StepFour = () => {
               ref={register}
               isInvalid={errors.otherObjectives}
               placeholder="Other Objectives..."
+              disabled={mode === 'view' || mode === 'delete'}
             />
           </Form.Group>
         </Card.Body>

@@ -145,6 +145,7 @@ const StepTwo = () => {
                   getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
                   rules={{ required: 'Staff Name is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.staffName}
+                  disabled={mode === 'view' || mode === 'delete'}
                   
                 />
               </Form.Group>
@@ -181,6 +182,7 @@ const StepTwo = () => {
                         isInvalid={errors.keyOfficers?.[index]?.datejoin}
                         className="form-control is-invalid"
                         placeholderText="Length of Stay..."
+                        disabled={mode === 'view' || mode === 'delete'}
                       />
                     </Fragment>
                   )}
@@ -195,6 +197,7 @@ const StepTwo = () => {
                   control={control}
                   rules={{ required: 'Job Stay Year is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayYear}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId={`keyOfficers[${index}].jobStayMonth`}>
@@ -206,9 +209,10 @@ const StepTwo = () => {
                   control={control}
                   rules={{ required: 'Job Stay Month is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayMonth}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
               </Form.Group>
-              {fields.length > 1 && (
+              {(mode === 'create' || mode === 'edit') && fields.length > 1 && (
                 <Form.Group as={Col} controlId={`keyOfficers[${index}].delete`}
                   className="d-flex align-items-center justify-content-center" xs="auto"
                 >
@@ -217,9 +221,11 @@ const StepTwo = () => {
               )}
             </Row>
           ))}
-          <Form.Group>
-            <Button variant="primary" type="button" onClick={append}>Add Staff</Button>
-          </Form.Group>
+          {(mode === 'create' || mode === 'edit') && (
+            <Form.Group>
+              <Button variant="primary" type="button" onClick={append}>Add Staff</Button>
+            </Form.Group>
+          )}
         </Card.Body>
       </Card>
     </Fragment>

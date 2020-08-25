@@ -55,7 +55,7 @@ const StepSix = () => {
                   getOptionLabel={option => option.description}
                   rules={{ required: 'Worksheet Status is required!' }}
                   isInvalid={errors.worksheetStatus}
-                  disabled={mode === 'create'}
+                  disabled={mode === 'create' || mode === 'view' || mode === 'delete' }
                 />
               </Form.Group>
             </Col>

@@ -109,6 +109,7 @@ const StepThree = () => {
                       getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
                       rules={{ required: 'Auditor is required!' }}
                       isInvalid={errors.auditTeams?.[index]?.auditorId}
+                      disabled={mode === 'view' || mode === 'delete'}
                     />
                   </Form.Group>
                   <Form.Group as={Col} controlId={`auditTeams[${index}].auditorRole`}>
@@ -138,11 +139,12 @@ const StepThree = () => {
                       isInvalid={errors.auditTeams?.[index]?.coverages}
                       isMulti
                       hideSelectedOptions={false}
+                      disabled={mode === 'view' || mode === 'delete'}
                     />
                   </Form.Group>
                 </Row>
               </Col>
-              {auditTeamsFields.length > 1 && (
+              {(mode === 'create' || mode === 'edit') && auditTeamsFields.length > 1 && (
                 <Form.Group as={Col} controlId={`auditTeams[${index}].delete`}
                   className="d-flex align-items-center justify-content-center" xs="auto"
                 >
@@ -151,9 +153,11 @@ const StepThree = () => {
               )}
             </Row>
           ))}
-          <Form.Group>
-            <Button variant="primary" type="button" onClick={auditTeamsAppend}>Add Inspector</Button>
-          </Form.Group>
+          {(mode === 'create' || mode === 'edit') && (
+            <Form.Group>
+              <Button variant="primary" type="button" onClick={auditTeamsAppend}>Add Inspector</Button>
+            </Form.Group>
+          )}
         </Card.Body>
       </Card>
       <Card className="mt-3">
@@ -176,6 +180,7 @@ const StepThree = () => {
                   getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
                   rules={{ required: 'Reviewer is required!' }}
                   isInvalid={errors.reviewers?.[index]?.reviewer}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId={`reviewers[${index}].reviewerRole`}>
@@ -188,7 +193,7 @@ const StepThree = () => {
                   readOnly
                   defaultValue={getDesignate(watchReviewers?.[index]?.reviewer?.designate)} />
               </Form.Group>
-              {reviewersFields.length > 1 && (
+              {(mode === 'create' || mode === 'edit') && reviewersFields.length > 1 && (
                 <Form.Group as={Col} controlId={`reviewers[${index}].delete`}
                   className="d-flex align-items-center justify-content-center" xs="auto"
                 >
@@ -197,9 +202,11 @@ const StepThree = () => {
               )}
             </Row>
           ))}
-          <Form.Group>
-            <Button variant="primary" type="button" onClick={reviewersAppend}>Add Reviewer</Button>
-          </Form.Group>
+          {(mode === 'create' || mode === 'edit') && (
+            <Form.Group>
+              <Button variant="primary" type="button" onClick={reviewersAppend}>Add Reviewer</Button>
+            </Form.Group>
+          )}
           <Row>
             <Form.Group as={Col} controlId="approver">
               <Form.Label>
@@ -214,6 +221,7 @@ const StepThree = () => {
                 getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
                 rules={{ required: 'Approver is required!' }}
                 isInvalid={errors.approver}
+                disabled={mode === 'view' || mode === 'delete'}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="approverRole">

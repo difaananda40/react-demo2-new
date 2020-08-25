@@ -80,6 +80,7 @@ const StepFive = () => {
               ref={register}
               isInvalid={errors.approachDetail}
               placeholder="Approach Detail..."
+              disabled={mode === 'view' || mode === 'delete'}
             />
           </Form.Group>
         </Card.Body>
@@ -104,6 +105,7 @@ const StepFive = () => {
                   getOptionLabel={option => option.description}
                   rules={{ required: 'Approach is required!' }}
                   isInvalid={errors.approaches?.[index]?.approach}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
               </Form.Group>
               <Form.Group as={Col} xs="12" md="4" controlId={`approaches[${index}].approachPercent`}>
@@ -127,6 +129,7 @@ const StepFive = () => {
                     }
                   })}
                   defaultValue={item.approachPercent}
+                  disabled={mode === 'view' || mode === 'delete'}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.approaches?.[index]?.approachPercent?.message}
@@ -143,7 +146,7 @@ const StepFive = () => {
                   value={getGrade(watchApproaches?.[index]?.approachPercent)}
                 />
               </Form.Group>
-              {fields.length > 1 && (
+              {(mode === 'create' || mode === 'edit') && fields.length > 1 && (
                 <Form.Group as={Col} controlId={`approaches[${index}].delete`}
                   className="d-flex align-items-center justify-content-center" xs="auto"
                 >
@@ -152,9 +155,11 @@ const StepFive = () => {
               )}
             </Row>
           ))}
-          <Form.Group>
-            <Button variant="primary" type="button" onClick={append}>Add Approach</Button>
-          </Form.Group>
+          {(mode === 'create' || mode === 'edit') && (
+            <Form.Group>
+              <Button variant="primary" type="button" onClick={append}>Add Approach</Button>
+            </Form.Group>
+          )}
           <Form.Group as={Row} className="mt-3">
             <Form.Label column xs="2">
               Overall Coverage
