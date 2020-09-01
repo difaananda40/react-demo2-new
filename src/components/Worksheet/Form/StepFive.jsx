@@ -20,10 +20,6 @@ const StepFive = () => {
     name: "approaches"
   });
 
-  useEffect(() => {
-    if(mode === 'create') append();
-  }, [append])
-
   const [ overallCoverage, setOverallCoverage ] = useState(null);
 
   const watchApproaches = useWatch({ name: 'approaches' });
@@ -49,13 +45,12 @@ const StepFive = () => {
       })
     }
     else {
-
       reset({
         approachDetail: null,
         approaches: [{}]
       })
     }
-  }, [selectedData, reset, getValues])
+  }, [selectedData, reset, getValues, mode])
 
   const getGrade = (percentage) => {
     if(percentage >= 80 && percentage <= 100) return 'A';

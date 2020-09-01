@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Container,
   Row,
@@ -67,7 +67,7 @@ const Worksheet = () => {
       ...prev,
       showForm: false
     }))
-  }, []);
+  }, [state.data]);
 
   const selectData = useCallback((data) => {
     setState(prev => ({
@@ -88,7 +88,7 @@ const Worksheet = () => {
         mode: null,
       }))
     }
-  }, []);
+  }, [state]);
 
   return (
     <Container fluid className="p-4" style={{ backgroundColor: '#F2F2F2' }}>

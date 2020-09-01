@@ -38,7 +38,7 @@ const StepOne = () => {
   }, [])
   // End modal
 
-  const { register, errors, control, setValue, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
 
   const watchBranchId = useWatch({ name: 'branchId' });
 
@@ -79,7 +79,7 @@ const StepOne = () => {
         lastAuditVisit: null
       });
     }
-  }, [selectedData])
+  }, [getValues, mode, reset, selectedData])
 
   return (
     <Fragment>

@@ -31,13 +31,6 @@ const StepThree = () => {
   const [ coverages, setCoverages ] = useState([...coveragesJson])
 
   useEffect(() => {
-    if(mode === 'create') {
-      auditTeamsAppend();
-      reviewersAppend();
-    }
-  }, [auditTeamsAppend, reviewersAppend])
-
-  useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -58,7 +51,7 @@ const StepThree = () => {
         approver: null
       })
     }
-  }, [selectedData, reset, users, getValues])
+  }, [selectedData, reset, getValues, mode])
 
   
   const watchAuditTeams = useWatch({ name: 'auditTeams' });

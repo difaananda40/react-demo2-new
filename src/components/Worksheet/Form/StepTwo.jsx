@@ -24,7 +24,7 @@ const months = new Array(10 + 1).fill().map((e,i) => {
 });
 
 const StepTwo = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode, setValue } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -34,13 +34,8 @@ const StepTwo = () => {
   const [ users, setUsers ] = useState([...usersJson])
 
   useEffect(() => {
-    if(mode === 'create') append();
-  }, [append])
-
-  useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
-        ...getValues(),
         keyOfficers: selectedData.keyofficers.map(sd => ({
           staffName: users.find(uj => uj.userid === sd.staffName),
           datejoin: moment(sd.datejoin, 'YYYYMMDD').toDate(),
@@ -51,10 +46,10 @@ const StepTwo = () => {
     }
     else {
       reset({
-        keyOfficers: []
+        keyOfficers: [{}]
       })
     }
-  }, [selectedData])
+  }, [mode, reset, selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
 

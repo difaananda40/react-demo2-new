@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useFormContext, Controller, useFieldArray } from "react-hook-form";
 import {
   Form,
@@ -21,10 +21,6 @@ const StepFour = () => {
   });
 
   useEffect(() => {
-    if(mode === 'create') append();
-  }, [append])
-
-  useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -38,7 +34,7 @@ const StepFour = () => {
         otherObjectives: null
       })
     }
-  }, [selectedData, reset, getValues])
+  }, [selectedData, reset, getValues, mode])
 
   return (
     <Fragment>

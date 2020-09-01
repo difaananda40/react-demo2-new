@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useFormContext, Controller, useFieldArray, useWatch } from "react-hook-form";
+import React, { Fragment, useEffect } from 'react';
+import { useFormContext, Controller } from "react-hook-form";
 import {
   Form,
   Row,
   Col,
-  Card,
-  Button
+  Card
 } from 'react-bootstrap';
 import Select from "../../Shared/Select";
 import moment from 'moment';
@@ -15,7 +14,7 @@ import { getOperation } from '../../helper.js';
 import workflowsJson from '../../Dummy/ic4pro_auditworkflow.json';
 
 const StepSix = () => {
-  const { register, errors, control, setValue, mode, selectedData, reset, getValues } = useFormContext();
+  const { register, errors, control, mode, selectedData, reset, getValues } = useFormContext();
 
   useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
@@ -31,7 +30,7 @@ const StepSix = () => {
         recordCounter: 0
       })
     }
-  }, [selectedData])
+  }, [getValues, mode, reset, selectedData])
 
   return (
     <Fragment>
