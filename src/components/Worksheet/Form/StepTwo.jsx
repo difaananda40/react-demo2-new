@@ -52,6 +52,7 @@ const StepTwo = () => {
       })
     }
     console.log('effect two')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getValues, mode, reset, selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });

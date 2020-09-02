@@ -53,6 +53,7 @@ const StepThree = () => {
       })
       console.log('effect three')
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedData, reset, getValues, mode])
 
   

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState, useEffect, useMemo } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import {
   Modal,
   Button,
