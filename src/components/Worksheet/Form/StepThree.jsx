@@ -43,7 +43,6 @@ const StepThree = () => {
         })),
         approver: users.find(uj => uj.userid === selectedData.approver)
       })
-      console.log('mode edit')
     }
     else {
       reset({
@@ -52,9 +51,9 @@ const StepThree = () => {
         reviewers: [{}],
         approver: null
       })
-      console.log('mode create')
+      console.log('effect three')
     }
-  }, [selectedData, reset, getValues, auditTeamsAppend, reviewersAppend])
+  }, [selectedData, reset, getValues, mode])
 
   
   const watchAuditTeams = useWatch({ name: 'auditTeams' });

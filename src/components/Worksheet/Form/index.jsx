@@ -7,8 +7,6 @@ import {
   Nav
 } from 'react-bootstrap';
 import { useForm, FormProvider } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
-import moment from 'moment';
 
 // Step Components
 const StepOne = lazy(() => import('./StepOne'));
@@ -27,13 +25,6 @@ const FormContainer = ({
   deleteData
 }) => {
   const [ tabKey, setTabKey ] = useState('tab1');
-
-  const handleTab = (type) => {
-    let lastNum = parseInt(tabKey[tabKey.length - 1]);
-    if(type === 'next') lastNum += 1
-    else if(type ==='prev') lastNum -= 1
-    setTabKey('tab' + lastNum);
-  }
 
   const { reset, ...methods } = useForm();
 
@@ -180,17 +171,12 @@ const FormContainer = ({
                         <StepSix />
                       </Tab.Pane>
                     </Suspense>
-                    {/* <div className="d-flex flex-row justify-content-end mt-3">
-                      {tabKey !== 'tab1' && <Button className="mr-2" variant="danger" onClick={() => handleTab('prev')}>Previous</Button>}
-                      {tabKey !== 'tab6' && <Button onClick={() => handleTab('next')}>Next</Button>}
-                    </div> */}
                   </Tab.Content>
                 </Card.Body>
               </Card>
             </Tab.Container>
           </Modal.Body>
         </form>
-        {/* <DevTool control={methods.control} /> */}
       </FormProvider>
     </Modal>
   )
