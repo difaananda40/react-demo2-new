@@ -60,6 +60,7 @@ const StepFour = () => {
                   rules={{ required: 'Objective is required!' }}
                   isInvalid={errors.auditObjectives?.[index]}
                   disabled={mode === 'view' || mode === 'delete'}
+                  defaultValue={item || ""}
                 />
               </Form.Group>
               {(mode === 'create' || mode === 'edit') && fields.length > 1 && (

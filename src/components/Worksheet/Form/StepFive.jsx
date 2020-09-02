@@ -101,6 +101,7 @@ const StepFive = () => {
                   rules={{ required: 'Approach is required!' }}
                   isInvalid={errors.approaches?.[index]?.approach}
                   disabled={mode === 'view' || mode === 'delete'}
+                  defaultValue={item.approach || ""}
                 />
               </Form.Group>
               <Form.Group as={Col} xs="12" md="4" controlId={`approaches[${index}].approachPercent`}>

@@ -63,7 +63,7 @@ const StepThree = () => {
     if(watchAuditTeams) {    
       setCoverages(prevCoverages => {
         let selectedCoverages = [];
-        watchAuditTeams.forEach(wat => wat.coverages?.forEach(cv => selectedCoverages.push(cv.key)))
+        watchAuditTeams.forEach(wat => wat.coverages.forEach(cv => selectedCoverages.push(cv.key)))
         const newCoverages = prevCoverages?.map(cv => ({ ...cv, isDisabled: selectedCoverages.includes(cv.key) }))
         return newCoverages;
       })
@@ -103,6 +103,7 @@ const StepThree = () => {
                       rules={{ required: 'Auditor is required!' }}
                       isInvalid={errors.auditTeams?.[index]?.auditorId}
                       disabled={mode === 'view' || mode === 'delete'}
+                      defaultValue={item.auditorId || ""}
                     />
                   </Form.Group>
                   <Form.Group as={Col} controlId={`auditTeams[${index}].auditorRole`}>
@@ -133,6 +134,7 @@ const StepThree = () => {
                       isMulti
                       hideSelectedOptions={false}
                       disabled={mode === 'view' || mode === 'delete'}
+                      defaultValue={item.coverages || []}
                     />
                   </Form.Group>
                 </Row>
@@ -174,6 +176,7 @@ const StepThree = () => {
                   rules={{ required: 'Reviewer is required!' }}
                   isInvalid={errors.reviewers?.[index]?.reviewer}
                   disabled={mode === 'view' || mode === 'delete'}
+                  defaultValue={item.reviewer || ""}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId={`reviewers[${index}].reviewerRole`}>

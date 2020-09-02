@@ -47,12 +47,10 @@ const StepTwo = () => {
     }
     else {
       reset({
-        ...getValues(),
         keyOfficers: [{}]
       })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [getValues, mode, reset, selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
 
@@ -144,7 +142,7 @@ const StepTwo = () => {
                   rules={{ required: 'Staff Name is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.staffName}
                   disabled={mode === 'view' || mode === 'delete'}
-                  
+                  defaultValue={item.staffName || ""}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId={`keyOfficers[${index}].gradeLevel`}>
@@ -171,6 +169,7 @@ const StepTwo = () => {
                   control={control}
                   name={`keyOfficers[${index}].datejoin`}
                   rules={{ required: 'Length of Stay is required!' }}
+                  defaultValue={item.datejoin || ""}
                   render={({ onChange, onBlur, value }) => (
                     <Fragment>
                       <Datepicker
@@ -196,6 +195,7 @@ const StepTwo = () => {
                   rules={{ required: 'Job Stay Year is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayYear}
                   disabled={mode === 'view' || mode === 'delete'}
+                  defaultValue={item.jobStayYear || ""}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId={`keyOfficers[${index}].jobStayMonth`}>
@@ -208,6 +208,7 @@ const StepTwo = () => {
                   rules={{ required: 'Job Stay Month is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayMonth}
                   disabled={mode === 'view' || mode === 'delete'}
+                  defaultValue={item.jobStayMonth || ""}
                 />
               </Form.Group>
               {(mode === 'create' || mode === 'edit') && fields.length > 1 && (
