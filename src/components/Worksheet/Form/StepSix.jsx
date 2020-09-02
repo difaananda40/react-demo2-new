@@ -26,6 +26,7 @@ const StepSix = () => {
     }
     else {
       reset({
+        ...getValues(),
         worksheetStatus: workflowsJson.find(wf => wf.key === 'New'),
         recordCounter: 0
       })

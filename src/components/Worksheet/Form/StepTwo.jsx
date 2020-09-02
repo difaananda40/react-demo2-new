@@ -47,6 +47,7 @@ const StepTwo = () => {
     }
     else {
       reset({
+        ...getValues(),
         keyOfficers: [{}]
       })
     }

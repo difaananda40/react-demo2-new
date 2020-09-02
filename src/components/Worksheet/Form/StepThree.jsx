@@ -43,15 +43,18 @@ const StepThree = () => {
         })),
         approver: users.find(uj => uj.userid === selectedData.approver)
       })
+      console.log('mode edit')
     }
     else {
       reset({
+        ...getValues(),
         auditTeams: [{}],
         reviewers: [{}],
         approver: null
       })
+      console.log('mode create')
     }
-  }, [selectedData, reset, getValues, mode])
+  }, [selectedData, reset, getValues, auditTeamsAppend, reviewersAppend])
 
   
   const watchAuditTeams = useWatch({ name: 'auditTeams' });
@@ -63,7 +66,7 @@ const StepThree = () => {
     if(watchAuditTeams) {    
       setCoverages(prevCoverages => {
         let selectedCoverages = [];
-        watchAuditTeams.forEach(wat => wat.coverages.forEach(cv => selectedCoverages.push(cv.key)))
+        watchAuditTeams.forEach(wat => wat.coverages?.forEach(cv => selectedCoverages.push(cv.key)))
         const newCoverages = prevCoverages?.map(cv => ({ ...cv, isDisabled: selectedCoverages.includes(cv.key) }))
         return newCoverages;
       })
@@ -134,7 +137,7 @@ const StepThree = () => {
                       isMulti
                       hideSelectedOptions={false}
                       disabled={mode === 'view' || mode === 'delete'}
-                      defaultValue={item.coverages || []}
+                      defaultValue={item.coverages}
                     />
                   </Form.Group>
                 </Row>

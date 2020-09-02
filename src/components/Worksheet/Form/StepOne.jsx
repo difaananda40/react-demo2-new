@@ -67,6 +67,7 @@ const StepOne = () => {
     }
     else {
       reset({
+        ...getValues(),
         branchId: null,
         startMonth: null,
         startYear: null,

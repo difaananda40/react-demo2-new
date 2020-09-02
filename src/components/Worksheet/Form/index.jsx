@@ -42,46 +42,47 @@ const FormContainer = ({
   }, [mode, reset])
 
   const onSubmit = data => {
-    const newData = {
-      ...data,
-      keyofficers: data.keyOfficers.map(ko => ({
-        ...ko,
-        datejoin: moment(ko.datejoin).format('YYYYMMDD'),
-        jobStayMonth: ko.jobStayMonth.value,
-        jobStayYear: ko.jobStayYear.value,
-        staffName: ko.staffName.userid
-      })),
-      auditObjectives: data.auditObjectives.map(ao => ({ objectiveId: ao.key })),
-      approaches: data.approaches.map(ap => ({ ...ap, approach: ap.approach.key })),
-      approver: data.approver.userid,
-      approverRole: data.approver.designate,
-      auditTeam: data.auditTeams.map(at => ({ 
-        ...at,
-        auditorId: at.auditorId.userid,
-        specificCoverage: at.coverages.map(atc => ({ areaInspected: atc.key }))
-      })),
-      dateInitiated: moment().format('YYYYMMDDHHmmss'),
-      endMonth: data.endMonth.monthName,
-      endYear: data.endYear.auditYear,
-      exitMeetingDate: moment(data.exitMeetingDate).format('YYYYMMDD'),
-      inspectionType: data.inspectionType.key,
-      lastAuditVisit: data.lastAuditVisit,
-      overdueDate: moment().format('YYYYMMDD'),
-      recordCounter: mode === 'create' ? 1 : mode === 'edit' && parseInt(data.recordCounter) + 1,
-      recordDate: moment().format('YYYYMMDD'),
-      recordTime: moment().format('HHmmss'),
-      reviewers: data.reviewers.map(rv => ({
-        ...rv,
-        reviewer: rv.reviewer.userid
-      })),
-      startMonth: data.startMonth.monthName,
-      startYear: data.startYear.auditYear,
-      visitPeriodEnd: moment(data.visitPeriodEnd).format('YYYYMMDD'),
-      visitPeriodStart: moment(data.visitPeriodStart).format('YYYYMMDD'),
-      worksheetStatus: data.worksheetStatus.description
-    }
-    submitForm(newData, mode)
-    reset();
+    // const newData = {
+    //   ...data,
+    //   keyofficers: data.keyOfficers.map(ko => ({
+    //     ...ko,
+    //     datejoin: moment(ko.datejoin).format('YYYYMMDD'),
+    //     jobStayMonth: ko.jobStayMonth.value,
+    //     jobStayYear: ko.jobStayYear.value,
+    //     staffName: ko.staffName.userid
+    //   })),
+    //   auditObjectives: data.auditObjectives.map(ao => ({ objectiveId: ao.value.key })),
+    //   approaches: data.approaches.map(ap => ({ ...ap, approach: ap.approach.key })),
+    //   approver: data.approver.userid,
+    //   approverRole: data.approver.designate,
+    //   auditTeam: data.auditTeams.map(at => ({ 
+    //     ...at,
+    //     auditorId: at.auditorId.userid,
+    //     specificCoverage: at.coverages.map(atc => ({ areaInspected: atc.key }))
+    //   })),
+    //   dateInitiated: moment().format('YYYYMMDDHHmmss'),
+    //   endMonth: data.endMonth.monthName,
+    //   endYear: data.endYear.auditYear,
+    //   exitMeetingDate: moment(data.exitMeetingDate).format('YYYYMMDD'),
+    //   inspectionType: data.inspectionType.key,
+    //   lastAuditVisit: data.lastAuditVisit,
+    //   overdueDate: moment().format('YYYYMMDD'),
+    //   recordCounter: mode === 'create' ? 1 : mode === 'edit' && parseInt(data.recordCounter) + 1,
+    //   recordDate: moment().format('YYYYMMDD'),
+    //   recordTime: moment().format('HHmmss'),
+    //   reviewers: data.reviewers.map(rv => ({
+    //     ...rv,
+    //     reviewer: rv.reviewer.userid
+    //   })),
+    //   startMonth: data.startMonth.monthName,
+    //   startYear: data.startYear.auditYear,
+    //   visitPeriodEnd: moment(data.visitPeriodEnd).format('YYYYMMDD'),
+    //   visitPeriodStart: moment(data.visitPeriodStart).format('YYYYMMDD'),
+    //   worksheetStatus: data.worksheetStatus.description
+    // }
+    // submitForm(newData, mode)
+    // reset();
+    console.log(data)
   };
 
   return (
@@ -160,22 +161,22 @@ const FormContainer = ({
                 <Card.Body>
                   <Tab.Content>
                     <Suspense fallback={<div>Loading...</div>}>
-                      <Tab.Pane eventKey="tab1" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab1">
                         <StepOne />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab2" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab2">
                         <StepTwo />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab3" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab3">
                         <StepThree />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab4" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab4">
                         <StepFour />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab5" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab5">
                         <StepFive />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="tab6" mountOnEnter={true}>
+                      <Tab.Pane eventKey="tab6">
                         <StepSix />
                       </Tab.Pane>
                     </Suspense>

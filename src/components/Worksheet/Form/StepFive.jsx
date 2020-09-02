@@ -46,6 +46,7 @@ const StepFive = () => {
     }
     else {
       reset({
+        ...getValues(),
         approachDetail: null,
         approaches: [{}]
       })

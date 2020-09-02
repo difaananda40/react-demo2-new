@@ -24,13 +24,14 @@ const StepFour = () => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
-        auditObjectives: selectedData.auditObjectives.map(ao => objectivesJson.find(oj => oj.key === ao.objectiveId)),
+        auditObjectives: selectedData.auditObjectives.map(ao => ({ value: objectivesJson.find(oj => oj.key === ao.objectiveId) })),
         otherObjectives: selectedData.otherObjectives
       })
     }
     else {
       reset({
-        auditObjectives: [null],
+        ...getValues(),
+        auditObjectives: [{}],
         otherObjectives: null
       })
     }
@@ -48,19 +49,19 @@ const StepFour = () => {
                 </Form.Label>
           {fields.map((item, index) => (
             <Row key={item.id}>
-              <Form.Group  as={Col} controlId={`auditObjectives[${index}]`}>
+              <Form.Group  as={Col} controlId={`auditObjectives[${index}].value`}>
                 
                 <Controller
-                  name={`auditObjectives[${index}]`}
+                  name={`auditObjectives[${index}].value`}
                   as={Select}
                   options={objectivesJson}
                   control={control}
                   getOptionValue={option => option.key}
                   getOptionLabel={option => option.description}
                   rules={{ required: 'Objective is required!' }}
-                  isInvalid={errors.auditObjectives?.[index]}
+                  isInvalid={errors.auditObjectives?.[index].value}
                   disabled={mode === 'view' || mode === 'delete'}
-                  defaultValue={item || ""}
+                  defaultValue={item.value || ""}
                 />
               </Form.Group>
               {(mode === 'create' || mode === 'edit') && fields.length > 1 && (
