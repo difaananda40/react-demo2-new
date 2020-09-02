@@ -36,6 +36,7 @@ const StepTwo = () => {
   useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
+        ...getValues(),
         keyOfficers: selectedData.keyofficers.map(sd => ({
           staffName: users.find(uj => uj.userid === sd.staffName),
           datejoin: moment(sd.datejoin, 'YYYYMMDD').toDate(),
@@ -46,12 +47,13 @@ const StepTwo = () => {
     }
     else {
       reset({
+        ...getValues(),
         keyOfficers: [{}]
       })
     }
     console.log('effect ni broo')
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode, reset, selectedData])
+  }, [getValues, mode, reset, selectedData])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
 
