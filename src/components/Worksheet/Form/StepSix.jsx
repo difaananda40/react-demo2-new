@@ -64,7 +64,7 @@ const StepSix = () => {
                 <Form.Label>
                   Date Initiated
                 </Form.Label>
-                <Form.Control name="dateInitiated" ref={register} readOnly defaultValue={moment().format('DD/MM/YYYY')} />
+                <Form.Control name="dateInitiated" ref={register} disabled defaultValue={moment().format('DD/MM/YYYY')} />
               </Form.Group>
             </Col>
           </Row>
@@ -74,7 +74,7 @@ const StepSix = () => {
                 <Form.Label>
                   Initiator
                 </Form.Label>
-                <Form.Control name="initiator" ref={register} readOnly defaultValue="user_id" />
+                <Form.Control name="initiator" ref={register} disabled defaultValue="user_id" />
               </Form.Group>
             </Col>
             <Col>
@@ -82,7 +82,7 @@ const StepSix = () => {
                 <Form.Label>
                   Record Date
                 </Form.Label>
-                <Form.Control name="recordDate" ref={register} readOnly defaultValue={moment().format('DD/MM/YYYY')} />
+                <Form.Control name="recordDate" ref={register} disabled defaultValue={moment().format('DD/MM/YYYY')} />
               </Form.Group>
             </Col>
             <Col>
@@ -90,7 +90,7 @@ const StepSix = () => {
                 <Form.Label>
                   Record Time
                 </Form.Label>
-                <Form.Control name="recordTime" ref={register} readOnly defaultValue={moment().format('HH:mm:ss')} />
+                <Form.Control name="recordTime" ref={register} disabled defaultValue={moment().format('HH:mm:ss')} />
               </Form.Group>
             </Col>
           </Row>
@@ -100,7 +100,7 @@ const StepSix = () => {
                 <Form.Label>
                   Operation
                 </Form.Label>
-                <Form.Control name="operation" ref={register} readOnly defaultValue={getOperation(mode)} />
+                <Form.Control name="operation" ref={register} disabled defaultValue={getOperation(mode)} />
               </Form.Group>
             </Col>
             <Col>
@@ -108,7 +108,7 @@ const StepSix = () => {
                 <Form.Label>
                   Workstation
                 </Form.Label>
-                <Form.Control name="workstation" ref={register} readOnly defaultValue="workstation"/>
+                <Form.Control name="workstation" ref={register} disabled defaultValue="workstation"/>
               </Form.Group>
             </Col>
             <Col>
@@ -116,7 +116,7 @@ const StepSix = () => {
                 <Form.Label>
                   No. Counter
                 </Form.Label>
-                <Form.Control name="recordCounter" ref={register} readOnly />
+                <Form.Control name="recordCounter" ref={register} disabled />
               </Form.Group>
             </Col>
           </Row>

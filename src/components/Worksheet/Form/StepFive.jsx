@@ -139,7 +139,7 @@ const StepFive = () => {
                 <Form.Control
                   name={`approaches[${index}].approachGrade`}
                   ref={register} 
-                  readOnly
+                  disabled
                   value={getGrade(watchApproaches?.[index]?.approachPercent)}
                 />
               </Form.Group>
@@ -166,7 +166,7 @@ const StepFive = () => {
                 type="number"
                 name="overallCoverage"
                 defaultValue={overallCoverage}
-                readOnly
+                disabled
               />
             </Col>
             <Col xs="4">
@@ -174,7 +174,7 @@ const StepFive = () => {
                 name="overallCoverageGrade"
                 value={getGrade(overallCoverage)}
                 ref={register}
-                readOnly
+                disabled
               />
             </Col>
           </Form.Group>

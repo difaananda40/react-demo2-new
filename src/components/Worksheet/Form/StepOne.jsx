@@ -77,7 +77,8 @@ const StepOne = () => {
         visitPeriodEnd: null,
         exitMeetingDate: null,
         inspectionType: null,
-        lastAuditVisit: null
+        lastAuditVisit: null,
+        auditIntro: null,
       });
     }
   }, [getValues, mode, reset, selectedData])
@@ -101,7 +102,7 @@ const StepOne = () => {
                     name="worksheetId"
                     ref={register}
                     defaultValue={`WK${moment().format('YYYYMMDDHHmmss')}`}
-                    readOnly
+                    disabled
                   />
                 </Col>
               </Form.Group>
@@ -295,7 +296,7 @@ const StepOne = () => {
                 name="lastAuditVisit"
                 ref={register}
                 value={worksheetsFiltered?.worksheetId || ''}
-                readOnly
+                disabled
               />
             </Col>
             <Col xs="auto">
@@ -353,7 +354,7 @@ const StepOne = () => {
               <Form.Control
                 type="text"
                 defaultValue={worksheetsFiltered?.worksheetId}
-                readOnly
+                disabled
               />
             </Col>
           </Form.Group>
@@ -365,7 +366,7 @@ const StepOne = () => {
               <Form.Control
                 type="text"
                 defaultValue={selectedInspectionType}
-                readOnly
+                disabled
               />
             </Col>
           </Form.Group>
@@ -377,7 +378,7 @@ const StepOne = () => {
               <Form.Control
                 type="text"
                 defaultValue={moment(worksheetsFiltered?.visitPeriodStart, 'YYYYMMMMDD').format('DD MMMM YYYY')}
-                readOnly
+                disabled
               />
             </Col>
             <Col xs="auto" className="d-flex align-items-center font-weight-bold">to</Col>
@@ -385,7 +386,7 @@ const StepOne = () => {
               <Form.Control
                 type="text"
                 defaultValue={moment(worksheetsFiltered?.visitPeriodEnd, 'YYYYMMMMDD').format('DD MMMM YYYY')}
-                readOnly
+                disabled
               />
             </Col>
           </Row>
@@ -403,7 +404,7 @@ const StepOne = () => {
                   <Form.Control
                     type="text"
                     defaultValue={getFullName(ko.staffName)}
-                    readOnly
+                    disabled
                   />
                 </Form.Group>
                 <Form.Group as={Col} sm="" controlId={`lastAuditVisitKeyOfficersGradeLevel${index}`}>
@@ -413,7 +414,7 @@ const StepOne = () => {
                   <Form.Control
                     type="text"
                     defaultValue={ko.gradelevel}
-                    readOnly
+                    disabled
                   />
                 </Form.Group>
                 <Form.Group as={Col} sm="" controlId={`lastAuditVisitKeyOfficersDesignate${index}`}>
@@ -423,7 +424,7 @@ const StepOne = () => {
                   <Form.Control
                     type="text"
                     defaultValue={getDesignate(ko.designate)}
-                    readOnly
+                    disabled
                   />
                 </Form.Group>
               </Row>
