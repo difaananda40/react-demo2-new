@@ -7,6 +7,7 @@ import {
   Nav
 } from 'react-bootstrap';
 import { useForm, FormProvider } from "react-hook-form";
+import moment from 'moment';
 
 // Step Components
 const StepOne = lazy(() => import('./StepOne'));
@@ -33,47 +34,46 @@ const FormContainer = ({
   }, [mode, reset])
 
   const onSubmit = data => {
-    // const newData = {
-    //   ...data,
-    //   keyofficers: data.keyOfficers.map(ko => ({
-    //     ...ko,
-    //     datejoin: moment(ko.datejoin).format('YYYYMMDD'),
-    //     jobStayMonth: ko.jobStayMonth.value,
-    //     jobStayYear: ko.jobStayYear.value,
-    //     staffName: ko.staffName.userid
-    //   })),
-    //   auditObjectives: data.auditObjectives.map(ao => ({ objectiveId: ao.value.key })),
-    //   approaches: data.approaches.map(ap => ({ ...ap, approach: ap.approach.key })),
-    //   approver: data.approver.userid,
-    //   approverRole: data.approver.designate,
-    //   auditTeam: data.auditTeams.map(at => ({ 
-    //     ...at,
-    //     auditorId: at.auditorId.userid,
-    //     specificCoverage: at.coverages.map(atc => ({ areaInspected: atc.key }))
-    //   })),
-    //   dateInitiated: moment().format('YYYYMMDDHHmmss'),
-    //   endMonth: data.endMonth.monthName,
-    //   endYear: data.endYear.auditYear,
-    //   exitMeetingDate: moment(data.exitMeetingDate).format('YYYYMMDD'),
-    //   inspectionType: data.inspectionType.key,
-    //   lastAuditVisit: data.lastAuditVisit,
-    //   overdueDate: moment().format('YYYYMMDD'),
-    //   recordCounter: mode === 'create' ? 1 : mode === 'edit' && parseInt(data.recordCounter) + 1,
-    //   recordDate: moment().format('YYYYMMDD'),
-    //   recordTime: moment().format('HHmmss'),
-    //   reviewers: data.reviewers.map(rv => ({
-    //     ...rv,
-    //     reviewer: rv.reviewer.userid
-    //   })),
-    //   startMonth: data.startMonth.monthName,
-    //   startYear: data.startYear.auditYear,
-    //   visitPeriodEnd: moment(data.visitPeriodEnd).format('YYYYMMDD'),
-    //   visitPeriodStart: moment(data.visitPeriodStart).format('YYYYMMDD'),
-    //   worksheetStatus: data.worksheetStatus.description
-    // }
-    // submitForm(newData, mode)
-    // reset();
-    console.log(data)
+    const newData = {
+      ...data,
+      keyofficers: data.keyOfficers.map(ko => ({
+        ...ko,
+        datejoin: moment(ko.datejoin).format('YYYYMMDD'),
+        jobStayMonth: ko.jobStayMonth.value,
+        jobStayYear: ko.jobStayYear.value,
+        staffName: ko.staffName.userid
+      })),
+      auditObjectives: data.auditObjectives.map(ao => ({ objectiveId: ao.value.key })),
+      approaches: data.approaches.map(ap => ({ ...ap, approach: ap.approach.key })),
+      approver: data.approver.userid,
+      approverRole: data.approver.designate,
+      auditTeam: data.auditTeams.map(at => ({ 
+        ...at,
+        auditorId: at.auditorId.userid,
+        specificCoverage: at.coverages.map(atc => ({ areaInspected: atc.key }))
+      })),
+      dateInitiated: moment().format('YYYYMMDDHHmmss'),
+      endMonth: data.endMonth.monthName,
+      endYear: data.endYear.auditYear,
+      exitMeetingDate: moment(data.exitMeetingDate).format('YYYYMMDD'),
+      inspectionType: data.inspectionType.key,
+      lastAuditVisit: data.lastAuditVisit,
+      overdueDate: moment().format('YYYYMMDD'),
+      recordCounter: mode === 'create' ? 1 : mode === 'edit' && parseInt(data.recordCounter) + 1,
+      recordDate: moment().format('YYYYMMDD'),
+      recordTime: moment().format('HHmmss'),
+      reviewers: data.reviewers.map(rv => ({
+        ...rv,
+        reviewer: rv.reviewer.userid
+      })),
+      startMonth: data.startMonth.monthName,
+      startYear: data.startYear.auditYear,
+      visitPeriodEnd: moment(data.visitPeriodEnd).format('YYYYMMDD'),
+      visitPeriodStart: moment(data.visitPeriodStart).format('YYYYMMDD'),
+      worksheetStatus: data.worksheetStatus.description
+    }
+    submitForm(newData, mode)
+    reset();
   };
 
   return (
@@ -125,7 +125,7 @@ const FormContainer = ({
             </div>
           </Modal.Header>
           <Modal.Body style={{ backgroundColor: '#F2F2F2' }}>
-            <Tab.Container id="tab-controlled" activeKey={tabKey} onSelect={(key) => setTabKey(key)}>
+            <Tab.Container id="tab-controlled" activeKey={tabKey} onSelect={(key) => setTabKey(key)} mountOnEnter={true}>
               <Card>
                 <Card.Header>
                   <Nav variant="tabs">
