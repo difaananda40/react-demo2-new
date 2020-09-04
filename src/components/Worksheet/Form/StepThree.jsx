@@ -128,7 +128,7 @@ const StepThree = () => {
                     <Form.Control
                       name={`auditTeams[${index}].auditorRole`}
                       ref={register}
-                      readOnly
+                      disabled
                       defaultValue={getDesignate(watchAuditTeams?.[index]?.auditorId?.designate)} />
                   </Form.Group>
                 </Row>
@@ -201,7 +201,7 @@ const StepThree = () => {
                 <Form.Control
                   name={`reviewers[${index}].reviewerRole`}
                   ref={register}
-                  readOnly
+                  disabled
                   defaultValue={getDesignate(watchReviewers?.[index]?.reviewer?.designate)} />
               </Form.Group>
               {(mode === 'create' || mode === 'edit') && reviewersFields.length > 1 && (
@@ -242,7 +242,7 @@ const StepThree = () => {
               <Form.Control
                 name="approverRole"
                 ref={register}
-                readOnly
+                disabled
                 defaultValue={getDesignate(watchApprover?.designate)} />
             </Form.Group>
           </Row>
