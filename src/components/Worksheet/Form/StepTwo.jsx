@@ -86,7 +86,7 @@ const StepTwo = () => {
   useEffect(() => {
     const branchId = watchBranchId?.branchId;
     setUsers(usersJson.filter(pu => pu.branchId === branchId));
-    if(isInitiated.current && watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
+    if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
       reset({
         ...getValues(),
         keyOfficers: [{}]
