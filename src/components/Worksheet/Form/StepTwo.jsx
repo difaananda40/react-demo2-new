@@ -83,21 +83,20 @@ const StepTwo = () => {
   const watchBranchId = useWatch({ name: 'branchId' });
   const prevWatchBranchId = usePrevious(watchBranchId);
 
-  // useEffect(() => {
-  //   if(isInitiated.current && watchBranchId?.branchId && !compare(watchBranchId, prevWatchBranchId)) {
-  //     console.log('dijalankan broo')
-  //     const branchId = watchBranchId?.branchId;
-  //     setUsers(usersJson.filter(pu => pu.branchId === branchId));
-  //     reset({
-  //       ...getValues(),
-  //       keyOfficers: [{}]
-  //     }, {
-  //       errors: true, // errors will not be reset 
-  //       dirtyFields: true, // dirtyFields will not be reset
-  //       isDirty: true, // dirty will not be reset
-  //     })
-  //   }
-  // }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
+  useEffect(() => {
+    const branchId = watchBranchId?.branchId;
+    setUsers(usersJson.filter(pu => pu.branchId === branchId));
+    if(isInitiated.current && watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
+      reset({
+        ...getValues(),
+        keyOfficers: [{}]
+      }, {
+        errors: true, // errors will not be reset 
+        dirtyFields: true, // dirtyFields will not be reset
+        isDirty: true, // dirty will not be reset
+      })
+    }
+  }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
