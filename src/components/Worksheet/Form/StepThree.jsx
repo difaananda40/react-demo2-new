@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback } from 'react';
+import React, { Fragment, useEffect, useState, useCallback, useRef } from 'react';
 import { useFormContext, Controller, useFieldArray, useWatch } from "react-hook-form";
 import {
   Form,
@@ -14,6 +14,14 @@ import usersJson from '../../Dummy/ic4pro_users.json';
 import coveragesJson from '../../Dummy/ic4pro_auditCoverage.json';
 import designatesJson from '../../Dummy/ic4pro_designates.json';
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 const StepThree = () => {
   const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
 
@@ -27,43 +35,47 @@ const StepThree = () => {
     name: "reviewers"
   });
 
-  const [ users, setUsers ] = useState([...usersJson])
-  const [ coverages, setCoverages ] = useState([...coveragesJson])
+  const [ coverages, setCoverages ] = useState([...coveragesJson]);
+
+  const isInitiated = useRef(false);
 
   useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        auditTeams: selectedData.auditTeam.map(at => ({
-          auditorId: users.find(uj => uj.userid === at.auditorId),
-          coverages: at.specificCoverage.map(sc => (coverages.find(cv => sc.areaInspected === cv.key)))
-        })),
-        reviewers: selectedData.reviewers.map(rv => ({
-          reviewer: users.find(uj => uj.userid === rv.reviewer)
-        })),
-        approver: users.find(uj => uj.userid === selectedData.approver)
-      })
-    }
-    else {
+    if(mode === 'create') {
       reset({
         ...getValues(),
         auditTeams: [{}],
         reviewers: [{}],
         approver: null
       })
-      console.log('effect three')
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedData, reset, getValues, mode])
+  }, [getValues, mode, reset])
 
-  
+  useEffect(() => {
+    if(!isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
+      reset({
+        ...getValues(),
+        auditTeams: selectedData.auditTeam.map(at => ({
+          auditorId: usersJson.find(uj => uj.userid === at.auditorId),
+          coverages: at.specificCoverage.map(sc => (coverages.find(cv => sc.areaInspected === cv.key)))
+        })),
+        reviewers: selectedData.reviewers.map(rv => ({
+          reviewer: usersJson.find(uj => uj.userid === rv.reviewer)
+        })),
+        approver: usersJson.find(uj => uj.userid === selectedData.approver)
+      })
+      isInitiated.current = true;
+    }
+  }, [selectedData, reset, getValues, mode, coverages])
+
   const watchAuditTeams = useWatch({ name: 'auditTeams' });
   const watchReviewers = useWatch({ name: 'reviewers' });
   const watchApprover = useWatch({ name: 'approver' });
 
+  const prevWatchAuditTeams = usePrevious(watchAuditTeams);
+
   // Disable selected option on next select
   useEffect(() => {
-    if(watchAuditTeams) {    
+    if(watchAuditTeams && !compare(watchAuditTeams, prevWatchAuditTeams)) {    
       setCoverages(prevCoverages => {
         let selectedCoverages = [];
         watchAuditTeams.forEach(wat => wat.coverages?.forEach(cv => selectedCoverages.push(cv.key)))
@@ -71,7 +83,7 @@ const StepThree = () => {
         return newCoverages;
       })
     }
-  }, [watchAuditTeams])
+  }, [prevWatchAuditTeams, watchAuditTeams])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
@@ -99,7 +111,7 @@ const StepThree = () => {
                     <Controller
                       name={`auditTeams[${index}].auditorId`}
                       as={Select}
-                      options={users}
+                      options={usersJson}
                       control={control}
                       getOptionValue={option => option.userid}
                       getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
@@ -172,7 +184,7 @@ const StepThree = () => {
                 <Controller
                   name={`reviewers[${index}].reviewer`}
                   as={Select}
-                  options={users}
+                  options={usersJson}
                   control={control}
                   getOptionValue={option => option.userid}
                   getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}
@@ -214,7 +226,7 @@ const StepThree = () => {
               <Controller
                 name="approver"
                 as={Select}
-                options={users}
+                options={usersJson}
                 control={control}
                 getOptionValue={option => option.userid}
                 getOptionLabel={option => `${option.title}. ${option.firstName} ${option.lastNamme}`}

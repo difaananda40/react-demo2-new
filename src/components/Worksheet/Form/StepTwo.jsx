@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback } from 'react';
+import React, { Fragment, useEffect, useState, useCallback, useRef } from 'react';
 import { useFormContext, Controller, useFieldArray, useWatch } from "react-hook-form";
 import {
   Form,
@@ -23,6 +23,14 @@ const months = new Array(10 + 1).fill().map((e,i) => {
   return {label: i, value: i}
 });
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 const StepTwo = () => {
   const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
 
@@ -32,9 +40,19 @@ const StepTwo = () => {
   });
 
   const [ users, setUsers ] = useState([...usersJson])
+  const isInitiated = useRef(false);
 
   useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        keyOfficers: [{}]
+      })
+    }
+  }, [getValues, mode, reset])
+
+  useEffect(() => {
+    if(!isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         keyOfficers: selectedData.keyofficers.map(sd => ({
@@ -44,46 +62,42 @@ const StepTwo = () => {
           jobStayMonth: months.find(m => m.value === parseInt(sd.jobStayMonth))
         }))
       })
+      isInitiated.current = true;
     }
-    else {
-      reset({
-        ...getValues(),
-        keyOfficers: [{}]
-      })
-    }
-    console.log('effect two')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getValues, mode, reset, selectedData])
+  }, [getValues, mode, reset, selectedData, users])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
+  const prevWatchKeyOfficers = usePrevious(watchKeyOfficers);
 
   // Disable selected option on next select
   useEffect(() => {
-    if(watchKeyOfficers) {
+    if(watchKeyOfficers && !compare(watchKeyOfficers, prevWatchKeyOfficers)) {
       setUsers(prevUsers => {
         const newWatchKeyOfficers = watchKeyOfficers.map(ko => ko.staffName?.userid);
         const newUsers = prevUsers?.map(u => ({ ...u, isDisabled: newWatchKeyOfficers.includes(u.userid) }))
         return newUsers;
       })
     }
-  }, [watchKeyOfficers])
+  }, [prevWatchKeyOfficers, watchKeyOfficers, users])
 
   const watchBranchId = useWatch({ name: 'branchId' });
+  const prevWatchBranchId = usePrevious(watchBranchId);
 
-  useEffect(() => {
-    const branchId = watchBranchId?.branchId;
-    setUsers(usersJson.filter(pu => pu.branchId === branchId));
-    return () => {
-      reset({
-        ...getValues(),
-        keyOfficers: [{}]
-      }, {
-        errors: true, // errors will not be reset 
-        dirtyFields: true, // dirtyFields will not be reset
-        isDirty: true, // dirty will not be reset
-      })
-    }
-  }, [append, getValues, reset, watchBranchId])
+  // useEffect(() => {
+  //   if(isInitiated.current && watchBranchId?.branchId && !compare(watchBranchId, prevWatchBranchId)) {
+  //     console.log('dijalankan broo')
+  //     const branchId = watchBranchId?.branchId;
+  //     setUsers(usersJson.filter(pu => pu.branchId === branchId));
+  //     reset({
+  //       ...getValues(),
+  //       keyOfficers: [{}]
+  //     }, {
+  //       errors: true, // errors will not be reset 
+  //       dirtyFields: true, // dirtyFields will not be reset
+  //       isDirty: true, // dirty will not be reset
+  //     })
+  //   }
+  // }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)
@@ -154,7 +168,7 @@ const StepTwo = () => {
                 // id="gradelevel"
                 name={`keyOfficers[${index}].gradeLevel`} 
                 ref={register} 
-                readOnly 
+                disabled 
                 defaultValue={watchKeyOfficers?.[index]?.staffName?.gradeLevel} />
               </Form.Group>
               <Form.Group as={Col} controlId={`keyOfficers[${index}].designate`}>
@@ -162,7 +176,7 @@ const StepTwo = () => {
                 <Form.Control
                   name={`keyOfficers[${index}].designate`}
                   ref={register}
-                  readOnly
+                  disabled
                   defaultValue={getDesignate(watchKeyOfficers?.[index]?.staffName?.designate)}
                 />
               </Form.Group>
