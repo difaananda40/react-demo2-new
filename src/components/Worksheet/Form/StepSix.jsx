@@ -14,15 +14,16 @@ import { getOperation } from '../../helper.js';
 import workflowsJson from '../../Dummy/ic4pro_auditworkflow.json';
 
 const StepSix = () => {
-  const { register, errors, control, mode, selectedData, reset, getValues } = useFormContext();
+  const { register, errors, control, mode, selectedData, reset, getValues, isReady, setIsReady } = useFormContext();
 
   useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
+    if(isReady.stepFive && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         worksheetStatus: workflowsJson.find(wf => wf.key === selectedData.worksheetStatus),
         recordCounter: parseInt(selectedData.recordCounter)
       })
+      setIsReady(prev => ({...prev, stepSix: true}))
     }
     else {
       reset({
@@ -31,7 +32,7 @@ const StepSix = () => {
         recordCounter: 0
       })
     }
-  }, [getValues, mode, reset, selectedData])
+  }, [getValues, isReady.stepFive, mode, reset, selectedData, setIsReady])
 
   return (
     <Fragment>

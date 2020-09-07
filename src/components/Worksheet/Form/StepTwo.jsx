@@ -32,7 +32,7 @@ function usePrevious(value) {
 }
 
 const StepTwo = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -52,7 +52,7 @@ const StepTwo = () => {
   }, [getValues, mode, reset])
 
   useEffect(() => {
-    if(!isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
+    if(isReady.stepOne && !isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         keyOfficers: selectedData.keyofficers.map(sd => ({
@@ -63,8 +63,9 @@ const StepTwo = () => {
         }))
       })
       isInitiated.current = true;
+      setIsReady(prev => ({...prev, stepTwo: true}))
     }
-  }, [getValues, mode, reset, selectedData, users])
+  }, [getValues, isReady.stepOne, mode, reset, selectedData, setIsReady, users])
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
   const prevWatchKeyOfficers = usePrevious(watchKeyOfficers);
@@ -84,19 +85,21 @@ const StepTwo = () => {
   const prevWatchBranchId = usePrevious(watchBranchId);
 
   useEffect(() => {
-    const branchId = watchBranchId?.branchId;
-    setUsers(usersJson.filter(pu => pu.branchId === branchId));
-    if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
-      reset({
-        ...getValues(),
-        keyOfficers: [{}]
-      }, {
-        errors: true, // errors will not be reset 
-        dirtyFields: true, // dirtyFields will not be reset
-        isDirty: true, // dirty will not be reset
-      })
+    if(isReady.stepOne) {
+      const branchId = watchBranchId?.branchId;
+      setUsers(usersJson.filter(pu => pu.branchId === branchId));
+      if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
+        reset({
+          ...getValues(),
+          keyOfficers: [{}]
+        }, {
+          errors: true, // errors will not be reset 
+          dirtyFields: true, // dirtyFields will not be reset
+          isDirty: true, // dirty will not be reset
+        })
+      }
     }
-  }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
+  }, [append, getValues, isReady.stepOne, prevWatchBranchId, reset, watchBranchId])
 
   const getDesignate = useCallback((designate) => {
     const designateFind = designatesJson.find(de => de.designate_id === designate)

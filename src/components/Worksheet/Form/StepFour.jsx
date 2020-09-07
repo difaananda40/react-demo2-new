@@ -13,7 +13,7 @@ import Select from "../../Shared/Select";
 import objectivesJson from '../../Dummy/ic4pro_auditObjective.json';
 
 const StepFour = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -21,12 +21,13 @@ const StepFour = () => {
   });
 
   useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
+    if(isReady.stepThree && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         auditObjectives: selectedData.auditObjectives.map(ao => ({ value: objectivesJson.find(oj => oj.key === ao.objectiveId) })),
         otherObjectives: selectedData.otherObjectives
       })
+      setIsReady(prev => ({...prev, stepFour: true}))
     }
     else {
       reset({
@@ -35,7 +36,7 @@ const StepFour = () => {
         otherObjectives: null
       })
     }
-  }, [selectedData, reset, getValues, mode])
+  }, [selectedData, reset, getValues, mode, isReady.stepThree, setIsReady])
 
   return (
     <Fragment>

@@ -23,7 +23,7 @@ function usePrevious(value) {
 }
 
 const StepThree = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
 
   const { fields: auditTeamsFields, append: auditTeamsAppend, remove: auditTeamsRemove } = useFieldArray({
     control,
@@ -51,7 +51,7 @@ const StepThree = () => {
   }, [getValues, mode, reset])
 
   useEffect(() => {
-    if(!isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
+    if(isReady.stepTwo && !isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         auditTeams: selectedData.auditTeam.map(at => ({
@@ -64,8 +64,9 @@ const StepThree = () => {
         approver: usersJson.find(uj => uj.userid === selectedData.approver)
       })
       isInitiated.current = true;
+      setIsReady(prev => ({...prev, stepThree: true}))
     }
-  }, [selectedData, reset, getValues, mode, coverages])
+  }, [selectedData, reset, getValues, mode, coverages, isReady.stepTwo, setIsReady])
 
   const watchAuditTeams = useWatch({ name: 'auditTeams' });
   const watchReviewers = useWatch({ name: 'reviewers' });

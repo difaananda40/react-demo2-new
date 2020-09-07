@@ -13,7 +13,7 @@ import Select from "../../Shared/Select";
 import coveragesJson from '../../Dummy/ic4pro_auditCoverage.json';
 
 const StepFive = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -34,7 +34,7 @@ const StepFive = () => {
   }, [watchApproaches])
 
   useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
+    if(isReady.stepFour && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
         approachDetail: selectedData.approachDetail,
@@ -43,6 +43,7 @@ const StepFive = () => {
           approachPercent: ap.approachPercent
         }))
       })
+      setIsReady(prev => ({...prev, stepFive: true}))
     }
     else {
       reset({
@@ -51,7 +52,7 @@ const StepFive = () => {
         approaches: [{}]
       })
     }
-  }, [selectedData, reset, getValues, mode])
+  }, [selectedData, reset, getValues, mode, isReady.stepFour, setIsReady])
 
   const getGrade = (percentage) => {
     if(percentage >= 80 && percentage <= 100) return 'A';

@@ -27,11 +27,28 @@ const FormContainer = ({
 }) => {
   const [ tabKey, setTabKey ] = useState('tab1');
 
+  const [ isReady, setIsReady ] = useState({
+    stepOne: false,
+    stepTwo: false,
+    stepThree: false,
+    stepFour: false,
+    stepFive: false,
+    stepSix: false
+  })
+
   const { reset, ...methods } = useForm();
 
   useEffect(() => {
     setTabKey('tab1');
-  }, [mode, reset])
+    setIsReady({
+      stepOne: false,
+      stepTwo: false,
+      stepThree: false,
+      stepFour: false,
+      stepFive: false,
+      stepSix: false
+    })
+  }, [mode])
 
   const onSubmit = data => {
     const newData = {
@@ -84,7 +101,7 @@ const FormContainer = ({
       keyboard={false}
       dialogClassName="modal-90w"
     >
-      <FormProvider {...methods} reset={reset} selectedData={selectedData} mode={mode}>
+      <FormProvider {...methods} reset={reset} selectedData={selectedData} mode={mode} isReady={isReady} setIsReady={setIsReady}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Modal.Header style={{ backgroundColor: '#8C00FF' }}>
             <Modal.Title className="text-capitalize">{mode} Worksheet</Modal.Title>

@@ -38,7 +38,7 @@ const StepOne = () => {
   }, [])
   // End modal
 
-  const { register, errors, control, getValues, reset, selectedData, mode } = useFormContext();
+  const { register, errors, control, getValues, reset, selectedData, mode, setIsReady } = useFormContext();
 
   const watchBranchId = useWatch({ name: 'branchId' });
 
@@ -64,6 +64,7 @@ const StepOne = () => {
         lastAuditVisit: worksheets.find(dt => dt.worksheetId === selectedData.worksheetId)[0],
         auditIntro: selectedData.auditIntro
       })
+      setIsReady(prev => ({...prev, stepOne: true}))
     }
     else {
       reset({
@@ -81,7 +82,7 @@ const StepOne = () => {
         auditIntro: null,
       });
     }
-  }, [getValues, mode, reset, selectedData])
+  }, [getValues, mode, reset, selectedData, setIsReady])
 
   return (
     <Fragment>
