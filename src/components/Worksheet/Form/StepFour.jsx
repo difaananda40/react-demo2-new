@@ -21,6 +21,16 @@ const StepFour = () => {
   });
 
   useEffect(() => {
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        auditObjectives: [{}],
+        otherObjectives: null
+      })
+    }
+  }, [getValues, mode, reset])
+
+  useEffect(() => {
     if(isReady.stepThree && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -28,13 +38,6 @@ const StepFour = () => {
         otherObjectives: selectedData.otherObjectives
       })
       setIsReady(prev => ({...prev, stepFour: true}))
-    }
-    else {
-      reset({
-        ...getValues(),
-        auditObjectives: [{}],
-        otherObjectives: null
-      })
     }
   }, [selectedData, reset, getValues, mode, isReady.stepThree, setIsReady])
 

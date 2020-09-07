@@ -48,6 +48,25 @@ const StepOne = () => {
   const selectedInspectionType = React.useMemo(() => inspectionTypes.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [worksheetsFiltered])
 
   useEffect(() => {
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        branchId: null,
+        startMonth: null,
+        startYear: null,
+        endMonth: null,
+        endYear: null,
+        visitPeriodStart: null,
+        visitPeriodEnd: null,
+        exitMeetingDate: null,
+        inspectionType: null,
+        lastAuditVisit: null,
+        auditIntro: null,
+      });
+    }
+  }, [getValues, mode, reset])
+
+  useEffect(() => {
     if(selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -65,22 +84,6 @@ const StepOne = () => {
         auditIntro: selectedData.auditIntro
       })
       setIsReady(prev => ({...prev, stepOne: true}))
-    }
-    else {
-      reset({
-        ...getValues(),
-        branchId: null,
-        startMonth: null,
-        startYear: null,
-        endMonth: null,
-        endYear: null,
-        visitPeriodStart: null,
-        visitPeriodEnd: null,
-        exitMeetingDate: null,
-        inspectionType: null,
-        lastAuditVisit: null,
-        auditIntro: null,
-      });
     }
   }, [getValues, mode, reset, selectedData, setIsReady])
 

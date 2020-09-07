@@ -17,6 +17,16 @@ const StepSix = () => {
   const { register, errors, control, mode, selectedData, reset, getValues, isReady, setIsReady } = useFormContext();
 
   useEffect(() => {
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        worksheetStatus: workflowsJson.find(wf => wf.key === 'New'),
+        recordCounter: 0
+      })
+    }
+  }, [getValues, mode, reset])
+
+  useEffect(() => {
     if(isReady.stepFive && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -24,13 +34,6 @@ const StepSix = () => {
         recordCounter: parseInt(selectedData.recordCounter)
       })
       setIsReady(prev => ({...prev, stepSix: true}))
-    }
-    else {
-      reset({
-        ...getValues(),
-        worksheetStatus: workflowsJson.find(wf => wf.key === 'New'),
-        recordCounter: 0
-      })
     }
   }, [getValues, isReady.stepFive, mode, reset, selectedData, setIsReady])
 

@@ -34,6 +34,16 @@ const StepFive = () => {
   }, [watchApproaches])
 
   useEffect(() => {
+    if(mode === 'create') {
+      reset({
+        ...getValues(),
+        approachDetail: null,
+        approaches: [{}]
+      })
+    }
+  }, [getValues, mode, reset])
+
+  useEffect(() => {
     if(isReady.stepFour && selectedData && (mode !== 'create' || mode === null)) {
       reset({
         ...getValues(),
@@ -44,13 +54,6 @@ const StepFive = () => {
         }))
       })
       setIsReady(prev => ({...prev, stepFive: true}))
-    }
-    else {
-      reset({
-        ...getValues(),
-        approachDetail: null,
-        approaches: [{}]
-      })
     }
   }, [selectedData, reset, getValues, mode, isReady.stepFour, setIsReady])
 
