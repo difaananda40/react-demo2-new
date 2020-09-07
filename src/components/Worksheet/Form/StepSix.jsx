@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useFormContext, Controller } from "react-hook-form";
 import {
   Form,
@@ -10,32 +10,11 @@ import Select from "../../Shared/Select";
 import moment from 'moment';
 import { getOperation } from '../../helper.js';
 
-// Data from JSON file
-import workflowsJson from '../../Dummy/ic4pro_auditworkflow.json';
-
 const StepSix = () => {
-  const { register, errors, control, mode, selectedData, reset, getValues, isReady, setIsReady } = useFormContext();
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        worksheetStatus: workflowsJson.find(wf => wf.key === 'New'),
-        recordCounter: 0
-      })
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(isReady.stepFive && selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        worksheetStatus: workflowsJson.find(wf => wf.key === selectedData.worksheetStatus),
-        recordCounter: parseInt(selectedData.recordCounter)
-      })
-      setIsReady(prev => ({...prev, stepSix: true}))
-    }
-  }, [getValues, isReady.stepFive, mode, reset, selectedData, setIsReady])
+  const { register, errors, control, mode, datas } = useFormContext();
+  const {
+    workflowsJson
+  } = datas;
 
   return (
     <Fragment>

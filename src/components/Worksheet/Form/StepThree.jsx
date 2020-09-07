@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useFormContext, Controller, useFieldArray, useWatch } from "react-hook-form";
 import {
   Form,
@@ -9,11 +9,6 @@ import {
 } from 'react-bootstrap';
 import Select from "../../Shared/Select";
 
-// Data from JSON file
-import usersJson from '../../Dummy/ic4pro_users.json';
-import coveragesJson from '../../Dummy/ic4pro_auditCoverage.json';
-import designatesJson from '../../Dummy/ic4pro_designates.json';
-
 function usePrevious(value) {
   const ref = useRef();
   useEffect(() => {
@@ -23,7 +18,14 @@ function usePrevious(value) {
 }
 
 const StepThree = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
+  const { register, errors, control, mode, methods, datas } = useFormContext();
+  const {
+    usersJson,
+    coveragesJson
+  } = datas;
+  const {
+    getDesignate
+  } = methods;
 
   const { fields: auditTeamsFields, append: auditTeamsAppend, remove: auditTeamsRemove } = useFieldArray({
     control,
@@ -36,37 +38,6 @@ const StepThree = () => {
   });
 
   const [ coverages, setCoverages ] = useState([...coveragesJson]);
-
-  const isInitiated = useRef(false);
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        auditTeams: [{}],
-        reviewers: [{}],
-        approver: null
-      })
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(isReady.stepTwo && !isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        auditTeams: selectedData.auditTeam.map(at => ({
-          auditorId: usersJson.find(uj => uj.userid === at.auditorId),
-          coverages: at.specificCoverage.map(sc => (coverages.find(cv => sc.areaInspected === cv.key)))
-        })),
-        reviewers: selectedData.reviewers.map(rv => ({
-          reviewer: usersJson.find(uj => uj.userid === rv.reviewer)
-        })),
-        approver: usersJson.find(uj => uj.userid === selectedData.approver)
-      })
-      isInitiated.current = true;
-      setIsReady(prev => ({...prev, stepThree: true}))
-    }
-  }, [selectedData, reset, getValues, mode, coverages, isReady.stepTwo, setIsReady])
 
   const watchAuditTeams = useWatch({ name: 'auditTeams' });
   const watchReviewers = useWatch({ name: 'reviewers' });
@@ -85,11 +56,6 @@ const StepThree = () => {
       })
     }
   }, [prevWatchAuditTeams, watchAuditTeams])
-
-  const getDesignate = useCallback((designate) => {
-    const designateFind = designatesJson.find(de => de.designate_id === designate)
-    return designateFind?.designate_name;
-  }, []);
 
   return (
     <Fragment>

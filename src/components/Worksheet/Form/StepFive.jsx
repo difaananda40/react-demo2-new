@@ -9,11 +9,11 @@ import {
 } from 'react-bootstrap';
 import Select from "../../Shared/Select";
 
-// Data from JSON file
-import coveragesJson from '../../Dummy/ic4pro_auditCoverage.json';
-
 const StepFive = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
+  const { register, errors, control, mode, datas } = useFormContext();
+  const {
+    coveragesJson
+  } = datas;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -32,30 +32,6 @@ const StepFive = () => {
       setOverallCoverage(approachesSum / approachesCount)
     }
   }, [watchApproaches])
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        approachDetail: null,
-        approaches: [{}]
-      })
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(isReady.stepFour && selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        approachDetail: selectedData.approachDetail,
-        approaches: selectedData.approaches.map(ap => ({
-          approach: coveragesJson.find(cj => cj.key === ap.approach),
-          approachPercent: ap.approachPercent
-        }))
-      })
-      setIsReady(prev => ({...prev, stepFive: true}))
-    }
-  }, [selectedData, reset, getValues, mode, isReady.stepFour, setIsReady])
 
   const getGrade = (percentage) => {
     if(percentage >= 80 && percentage <= 100) return 'A';

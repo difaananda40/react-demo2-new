@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useFormContext, Controller, useFieldArray } from "react-hook-form";
 import {
   Form,
@@ -9,37 +9,16 @@ import {
 } from 'react-bootstrap';
 import Select from "../../Shared/Select";
 
-// Data from JSON file
-import objectivesJson from '../../Dummy/ic4pro_auditObjective.json';
-
 const StepFour = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
+  const { register, errors, control, mode, datas } = useFormContext();
+  const {
+    objectivesJson
+  } = datas;
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "auditObjectives"
   });
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        auditObjectives: [{}],
-        otherObjectives: null
-      })
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(isReady.stepThree && selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        auditObjectives: selectedData.auditObjectives.map(ao => ({ value: objectivesJson.find(oj => oj.key === ao.objectiveId) })),
-        otherObjectives: selectedData.otherObjectives
-      })
-      setIsReady(prev => ({...prev, stepFour: true}))
-    }
-  }, [selectedData, reset, getValues, mode, isReady.stepThree, setIsReady])
 
   return (
     <Fragment>

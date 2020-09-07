@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useFormContext, Controller, useWatch } from "react-hook-form";
 import {
   Form,
@@ -12,80 +12,32 @@ import moment from 'moment';
 import Select from "../../Shared/Select";
 import Datepicker from "../../Shared/Datepicker";
 
-// Data from JSON file
-import worksheets from '../../Dummy/ic4pro_auditworksheets.json';
-import branches from '../../Dummy/ic4pro_branches.json';
-import months from '../../Dummy/ic4pro_auditMonths.json';
-import years from '../../Dummy/ic4pro_auditYears.json';
-import inspectionTypes from '../../Dummy/ic4pro_inspectiontypes.json';
-import designatesJson from '../../Dummy/ic4pro_designates.json';
-import usersJson from '../../Dummy/ic4pro_users.json';
-
 const StepOne = () => {
 
   // Modal Last Audit Detail
   const [ show, setShow ] = useState(false);
   const handleModal = () => setShow(prev => !prev);
-
-  const getDesignate = React.useCallback((designate) => {
-    const designateFind = designatesJson.find(de => de.designate_id === designate)
-    return designateFind?.designate_name;
-  }, []);
-
-  const getFullName = React.useCallback((staffName) => {
-    const user = usersJson.find(us => us.userid === staffName);
-    return `${user.title}. ${user.firstName} ${user.lastNamme}`;
-  }, [])
   // End modal
 
-  const { register, errors, control, getValues, reset, selectedData, mode, setIsReady } = useFormContext();
+  const { register, errors, control, mode, methods, datas } = useFormContext();
+  const {
+    worksheetsJson,
+    inspectionTypesJson,
+    branchesJson,
+    monthsJson,
+    yearsJson,
+  } = datas;
+  const {
+    getDesignate,
+    getFullName
+  } = methods;
 
   const watchBranchId = useWatch({ name: 'branchId' });
 
-  const worksheetsFiltered = React.useMemo(() => worksheets.filter(dt => dt.branchId === watchBranchId?.branchId)[0]
-  , [watchBranchId]);
+  const worksheetsFiltered = React.useMemo(() => worksheetsJson.filter(dt => dt.branchId === watchBranchId?.branchId)[0]
+  , [watchBranchId, worksheetsJson]);
 
-  const selectedInspectionType = React.useMemo(() => inspectionTypes.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [worksheetsFiltered])
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        branchId: null,
-        startMonth: null,
-        startYear: null,
-        endMonth: null,
-        endYear: null,
-        visitPeriodStart: null,
-        visitPeriodEnd: null,
-        exitMeetingDate: null,
-        inspectionType: null,
-        lastAuditVisit: null,
-        auditIntro: null,
-      });
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        worksheetId: selectedData.worksheetId,
-        branchId: branches.data.find(bc => bc.branchId === selectedData.branchId ),
-        startMonth: months.find(m => m.monthName === selectedData.startMonth),
-        startYear: years.find(y => y.auditYear === selectedData.startYear),
-        endMonth: months.find(m => m.monthName === selectedData.endMonth),
-        endYear: years.find(y => y.auditYear === selectedData.endYear),
-        visitPeriodStart: moment(selectedData.visitPeriodStart, 'YYYYMMDD').toDate(),
-        visitPeriodEnd: moment(selectedData.visitPeriodEnd, 'YYYYMMDD').toDate(),
-        exitMeetingDate: moment(selectedData.exitMeetingDate, 'YYYYMMDD').toDate(),
-        inspectionType: inspectionTypes.find(it => it.key === selectedData.inspectionType),
-        lastAuditVisit: worksheets.find(dt => dt.worksheetId === selectedData.worksheetId)[0],
-        auditIntro: selectedData.auditIntro
-      })
-      setIsReady(prev => ({...prev, stepOne: true}))
-    }
-  }, [getValues, mode, reset, selectedData, setIsReady])
+  const selectedInspectionType = React.useMemo(() => inspectionTypesJson.find(it => it.key === worksheetsFiltered?.inspectionType)?.description, [inspectionTypesJson, worksheetsFiltered])
 
   return (
     <Fragment>
@@ -121,14 +73,13 @@ const StepOne = () => {
                     name="branchId"
                     as={Select}
                     size="sm"
-                    options={branches.data}
+                    options={branchesJson.data}
                     control={control}
                     getOptionValue={option => option.branchId}
                     getOptionLabel={option => option.branchId + ' - ' + option.branchName}
                     rules={{ required: 'Branch name is required!' }}
                     isInvalid={errors.branchId}
                     disabled={mode === 'view' || mode === 'delete'}
-                    defaultValue=""
                   />
                 </Col>
               </Form.Group>
@@ -142,7 +93,7 @@ const StepOne = () => {
               <Controller
                 name="startMonth"
                 as={Select}
-                options={months}
+                options={monthsJson}
                 control={control}
                 getOptionValue={option => option.monthName}
                 getOptionLabel={option => option.monthName}
@@ -156,7 +107,7 @@ const StepOne = () => {
               <Controller
                 name="startYear"
                 as={Select}
-                options={years}
+                options={yearsJson}
                 control={control}
                 getOptionValue={option => option.auditYear}
                 getOptionLabel={option => option.auditYear}
@@ -171,7 +122,7 @@ const StepOne = () => {
               <Controller
                 name="endMonth"
                 as={Select}
-                options={months}
+                options={monthsJson}
                 control={control}
                 getOptionValue={option => option.monthName}
                 getOptionLabel={option => option.monthName}
@@ -185,7 +136,7 @@ const StepOne = () => {
               <Controller
                 name="endYear"
                 as={Select}
-                options={years}
+                options={yearsJson}
                 control={control}
                 getOptionValue={option => option.auditYear}
                 getOptionLabel={option => option.auditYear}
@@ -277,7 +228,7 @@ const StepOne = () => {
                   <Controller
                     name="inspectionType"
                     as={Select}
-                    options={inspectionTypes}
+                    options={inspectionTypesJson}
                     control={control}
                     getOptionValue={option => option.key}
                     getOptionLabel={option => option.description}

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useFormContext, Controller, useFieldArray, useWatch } from "react-hook-form";
 import {
   Form,
@@ -7,21 +7,8 @@ import {
   Card,
   Button
 } from 'react-bootstrap';
-import moment from 'moment';
 import Select from "../../Shared/Select";
 import Datepicker from "../../Shared/Datepicker";
-
-// Data from JSON file
-import usersJson from '../../Dummy/ic4pro_users.json';
-import designatesJson from '../../Dummy/ic4pro_designates.json';
-
-const years = new Array(25 + 1).fill().map((e,i) => {
-  return {label: i, value: i}
-});
-
-const months = new Array(10 + 1).fill().map((e,i) => {
-  return {label: i, value: i}
-});
 
 function usePrevious(value) {
   const ref = useRef();
@@ -32,40 +19,22 @@ function usePrevious(value) {
 }
 
 const StepTwo = () => {
-  const { register, errors, control, getValues, reset, selectedData, mode, isReady, setIsReady } = useFormContext();
+  const { register, errors, control, getValues, reset, mode, methods, datas } = useFormContext();
+  const {
+    usersJson,
+    jobStayMonths,
+    jobStayYears
+  } = datas;
+  const {
+    getDesignate
+  } = methods;
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "keyOfficers"
   });
 
-  const [ users, setUsers ] = useState([...usersJson])
-  const isInitiated = useRef(false);
-
-  useEffect(() => {
-    if(mode === 'create') {
-      reset({
-        ...getValues(),
-        keyOfficers: [{}]
-      })
-    }
-  }, [getValues, mode, reset])
-
-  useEffect(() => {
-    if(isReady.stepOne && !isInitiated.current && selectedData && (mode !== 'create' || mode === null)) {
-      reset({
-        ...getValues(),
-        keyOfficers: selectedData.keyofficers.map(sd => ({
-          staffName: users.find(uj => uj.userid === sd.staffName),
-          datejoin: moment(sd.datejoin, 'YYYYMMDD').toDate(),
-          jobStayYear: years.find(y => y.value === parseInt(sd.jobStayYear)),
-          jobStayMonth: months.find(m => m.value === parseInt(sd.jobStayMonth))
-        }))
-      })
-      isInitiated.current = true;
-      setIsReady(prev => ({...prev, stepTwo: true}))
-    }
-  }, [getValues, isReady.stepOne, mode, reset, selectedData, setIsReady, users])
+  const [ users, setUsers ] = useState([...usersJson]);
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
   const prevWatchKeyOfficers = usePrevious(watchKeyOfficers);
@@ -85,26 +54,19 @@ const StepTwo = () => {
   const prevWatchBranchId = usePrevious(watchBranchId);
 
   useEffect(() => {
-    if(isReady.stepOne) {
-      const branchId = watchBranchId?.branchId;
-      setUsers(usersJson.filter(pu => pu.branchId === branchId));
-      if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
-        reset({
-          ...getValues(),
-          keyOfficers: [{}]
-        }, {
-          errors: true, // errors will not be reset 
-          dirtyFields: true, // dirtyFields will not be reset
-          isDirty: true, // dirty will not be reset
-        })
-      }
+    const branchId = watchBranchId?.branchId;
+    setUsers(usersJson.filter(pu => pu.branchId === branchId));
+    if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
+      reset({
+        ...getValues(),
+        keyOfficers: [{}]
+      }, {
+        errors: true, // errors will not be reset 
+        dirtyFields: true, // dirtyFields will not be reset
+        isDirty: true, // dirty will not be reset
+      })
     }
-  }, [append, getValues, isReady.stepOne, prevWatchBranchId, reset, watchBranchId])
-
-  const getDesignate = useCallback((designate) => {
-    const designateFind = designatesJson.find(de => de.designate_id === designate)
-    return designateFind?.designate_name;
-  }, []);
+  }, [append, getValues, prevWatchBranchId, reset, usersJson, watchBranchId])
 
   return (
     <Fragment>
@@ -113,39 +75,38 @@ const StepTwo = () => {
           Key Officers
         </Card.Header>
         <Card.Body>
-                <Row>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="keyofficer">
-                  Staff Name
-                </Form.Label>
-                </Form.Group>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="gradelevel">
-                  Grade Level
-                </Form.Label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </Form.Group>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="" style={{textJustify:"inherit"}}>
-                  Function
-                </Form.Label>
-                </Form.Group>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="" style={{textJustify:"inherit"}}>
-                  Length Of Stay
-                </Form.Label>
-                </Form.Group>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="">
-                  Job Stay Year
-                </Form.Label>
-                </Form.Group>
-                <Form.Group as={Col}  >
-                <Form.Label htmlFor="">
-                  Job Stay Month
-                </Form.Label>
-                </Form.Group>
-                
-                </Row>
+          <Row>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="keyofficer">
+                Staff Name
+              </Form.Label>
+            </Form.Group>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="gradelevel">
+                Grade Level
+              </Form.Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </Form.Group>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="" style={{textJustify:"inherit"}}>
+                Function
+              </Form.Label>
+            </Form.Group>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="" style={{textJustify:"inherit"}}>
+                Length Of Stay
+              </Form.Label>
+            </Form.Group>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="">
+                Job Stay Year
+              </Form.Label>
+            </Form.Group>
+            <Form.Group as={Col}  >
+              <Form.Label htmlFor="">
+                Job Stay Month
+              </Form.Label>
+            </Form.Group>
+          </Row>
           {fields.map((item, index) => (
             <Row key={item.id}>
               <Form.Group as={Col} sm="" controlId={`keyOfficers[${index}].staffName`}>
@@ -209,7 +170,7 @@ const StepTwo = () => {
                 <Controller
                   name={`keyOfficers[${index}].jobStayYear`}
                   as={Select}
-                  options={years}
+                  options={jobStayYears}
                   control={control}
                   rules={{ required: 'Job Stay Year is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayYear}
@@ -222,7 +183,7 @@ const StepTwo = () => {
                 <Controller
                   name={`keyOfficers[${index}].jobStayMonth`}
                   as={Select}
-                  options={months}
+                  options={jobStayMonths}
                   control={control}
                   rules={{ required: 'Job Stay Month is required!' }}
                   isInvalid={errors.keyOfficers?.[index]?.jobStayMonth}

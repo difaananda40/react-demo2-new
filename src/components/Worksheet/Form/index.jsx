@@ -9,6 +9,26 @@ import {
 import { useForm, FormProvider } from "react-hook-form";
 import moment from 'moment';
 
+// Data from JSON file
+import worksheetsJson from '../../Dummy/ic4pro_auditworksheets.json';
+import branchesJson from '../../Dummy/ic4pro_branches.json';
+import monthsJson from '../../Dummy/ic4pro_auditMonths.json';
+import yearsJson from '../../Dummy/ic4pro_auditYears.json';
+import inspectionTypesJson from '../../Dummy/ic4pro_inspectiontypes.json';
+import designatesJson from '../../Dummy/ic4pro_designates.json';
+import usersJson from '../../Dummy/ic4pro_users.json';
+import coveragesJson from '../../Dummy/ic4pro_auditCoverage.json';
+import objectivesJson from '../../Dummy/ic4pro_auditObjective.json';
+import workflowsJson from '../../Dummy/ic4pro_auditworkflow.json';
+
+const jobStayYears = new Array(25 + 1).fill().map((e,i) => {
+  return {label: i, value: i}
+});
+
+const jobStayMonths = new Array(10 + 1).fill().map((e,i) => {
+  return {label: i, value: i}
+});
+
 // Step Components
 const StepOne = lazy(() => import('./StepOne'));
 const StepTwo = lazy(() => import('./StepTwo'));
@@ -27,28 +47,100 @@ const FormContainer = ({
 }) => {
   const [ tabKey, setTabKey ] = useState('tab1');
 
-  const [ isReady, setIsReady ] = useState({
-    stepOne: false,
-    stepTwo: false,
-    stepThree: false,
-    stepFour: false,
-    stepFive: false,
-    stepSix: false
-  })
-
   const { reset, ...methods } = useForm();
 
   useEffect(() => {
+    if(selectedData && mode !== 'create') {
+      reset({
+        // Step 1
+        worksheetId: selectedData.worksheetId,
+        branchId: branchesJson.data.find(bc => bc.branchId === selectedData.branchId),
+        startMonth: monthsJson.find(m => m.monthName === selectedData.startMonth),
+        startYear: yearsJson.find(y => y.auditYear === selectedData.startYear),
+        endMonth: monthsJson.find(m => m.monthName === selectedData.endMonth),
+        endYear: yearsJson.find(y => y.auditYear === selectedData.endYear),
+        visitPeriodStart: moment(selectedData.visitPeriodStart, 'YYYYMMDD').toDate(),
+        visitPeriodEnd: moment(selectedData.visitPeriodEnd, 'YYYYMMDD').toDate(),
+        exitMeetingDate: moment(selectedData.exitMeetingDate, 'YYYYMMDD').toDate(),
+        inspectionType: inspectionTypesJson.find(it => it.key === selectedData.inspectionType),
+        lastAuditVisit: worksheetsJson.find(dt => dt.worksheetId === selectedData.worksheetId)?.[0],
+        auditIntro: selectedData.auditIntro,
+        // Step 2
+        keyOfficers: selectedData.keyofficers.map(sd => ({
+          staffName: usersJson.find(uj => uj.userid === sd.staffName),
+          datejoin: moment(sd.datejoin, 'YYYYMMDD').toDate(),
+          jobStayYear: jobStayYears.find(y => y.value === parseInt(sd.jobStayYear)),
+          jobStayMonth: jobStayMonths.find(m => m.value === parseInt(sd.jobStayMonth))
+        })),
+        // Step 3
+        auditTeams: selectedData.auditTeam.map(at => ({
+          auditorId: usersJson.find(uj => uj.userid === at.auditorId),
+          coverages: at.specificCoverage.map(sc => (coveragesJson.find(cv => sc.areaInspected === cv.key)))
+        })),
+        reviewers: selectedData.reviewers.map(rv => ({
+          reviewer: usersJson.find(uj => uj.userid === rv.reviewer)
+        })),
+        approver: usersJson.find(uj => uj.userid === selectedData.approver),
+        // Step 4
+        auditObjectives: selectedData.auditObjectives.map(ao => ({ value: objectivesJson.find(oj => oj.key === ao.objectiveId) })),
+        otherObjectives: selectedData.otherObjectives,
+        // Step 5
+        approachDetail: selectedData.approachDetail,
+        approaches: selectedData.approaches.map(ap => ({
+          approach: coveragesJson.find(cj => cj.key === ap.approach),
+          approachPercent: ap.approachPercent
+        })),
+        // Step 6
+        worksheetStatus: workflowsJson.find(wf => wf.key === selectedData.worksheetStatus),
+        recordCounter: parseInt(selectedData.recordCounter),
+      })
+    }
+    else {
+      reset({
+        // Step 1
+        branchId: '',
+        startMonth: '',
+        startYear: '',
+        endMonth: '',
+        endYear: '',
+        visitPeriodStart: '',
+        visitPeriodEnd: '',
+        exitMeetingDate: '',
+        inspectionType: '',
+        lastAuditVisit: '',
+        auditIntro: '',
+        // Step 2
+        keyOfficers: [{}],
+        // Step 3
+        auditTeams: [{}],
+        reviewers: [{}],
+        approver: null,
+        // Step 4
+        auditObjectives: [{}],
+        otherObjectives: null,
+        // Step 5
+        approachDetail: null,
+        approaches: [{}],
+        // Step 6
+        worksheetStatus: workflowsJson.find(wf => wf.key === 'New'),
+        recordCounter: 0
+      });
+    }
+  }, [mode, reset, selectedData])
+
+  useEffect(() => {
     setTabKey('tab1');
-    setIsReady({
-      stepOne: false,
-      stepTwo: false,
-      stepThree: false,
-      stepFour: false,
-      stepFive: false,
-      stepSix: false
-    })
   }, [mode])
+
+  const getDesignate = React.useCallback((designate) => {
+    const designateFind = designatesJson.find(de => de.designate_id === designate)
+    return designateFind?.designate_name;
+  }, []);
+
+  const getFullName = React.useCallback((staffName) => {
+    const user = usersJson.find(us => us.userid === staffName);
+    return `${user.title}. ${user.firstName} ${user.lastNamme}`;
+  }, [])
 
   const onSubmit = data => {
     const newData = {
@@ -101,7 +193,30 @@ const FormContainer = ({
       keyboard={false}
       dialogClassName="modal-90w"
     >
-      <FormProvider {...methods} reset={reset} selectedData={selectedData} mode={mode} isReady={isReady} setIsReady={setIsReady}>
+      <FormProvider
+        {...methods}
+        reset={reset}
+        selectedData={selectedData}
+        mode={mode}
+        methods={{
+          getDesignate,
+          getFullName
+        }}
+        datas={{
+          worksheetsJson,
+          branchesJson,
+          monthsJson,
+          yearsJson,
+          inspectionTypesJson,
+          designatesJson,
+          usersJson,
+          jobStayMonths,
+          jobStayYears,
+          coveragesJson,
+          objectivesJson,
+          workflowsJson,
+        }}
+      >
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Modal.Header style={{ backgroundColor: '#8C00FF' }}>
             <Modal.Title className="text-capitalize">{mode} Worksheet</Modal.Title>
