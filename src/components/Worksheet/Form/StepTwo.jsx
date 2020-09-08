@@ -37,25 +37,25 @@ const StepTwo = () => {
   const [ users, setUsers ] = useState([...usersJson]);
 
   const watchKeyOfficers = useWatch({ name: 'keyOfficers' });
-  const prevWatchKeyOfficers = usePrevious(watchKeyOfficers);
-
-  // Disable selected option on next select
-  useEffect(() => {
-    if(watchKeyOfficers && !compare(watchKeyOfficers, prevWatchKeyOfficers)) {
-      setUsers(prevUsers => {
-        const newWatchKeyOfficers = watchKeyOfficers.map(ko => ko.staffName?.userid);
-        const newUsers = prevUsers?.map(u => ({ ...u, isDisabled: newWatchKeyOfficers.includes(u.userid) }))
-        return newUsers;
-      })
-    }
-  }, [prevWatchKeyOfficers, watchKeyOfficers])
 
   const watchBranchId = useWatch({ name: 'branchId' });
   const prevWatchBranchId = usePrevious(watchBranchId);
 
+  // Disable selected option on next select
   useEffect(() => {
-    const branchId = watchBranchId?.branchId;
-    setUsers(prevUsers => prevUsers.filter(pu => pu.branchId === branchId));
+    if(watchKeyOfficers && watchBranchId) {
+      setUsers(() => {
+        const newWatchKeyOfficers = watchKeyOfficers.map(ko => ko.staffName?.userid);
+        const newUsers = usersJson.filter(pu => pu.branchId === watchBranchId?.branchId).map(u => ({ ...u, isDisabled: newWatchKeyOfficers.includes(u.userid) }))
+        return newUsers;
+      })
+    }
+    else {
+      setUsers(usersJson.filter(pu => pu.branchId === watchBranchId?.branchId))
+    }
+  }, [usersJson, watchBranchId, watchKeyOfficers])
+
+  useEffect(() => {
     if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
       reset({
         ...getValues(),
@@ -66,7 +66,7 @@ const StepTwo = () => {
         isDirty: true, // dirty will not be reset
       })
     }
-  }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
+  }, [getValues, prevWatchBranchId, reset, watchBranchId])
 
   return (
     <Fragment>
