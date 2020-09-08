@@ -48,14 +48,14 @@ const StepTwo = () => {
         return newUsers;
       })
     }
-  }, [prevWatchKeyOfficers, watchKeyOfficers, users])
+  }, [prevWatchKeyOfficers, watchKeyOfficers])
 
   const watchBranchId = useWatch({ name: 'branchId' });
   const prevWatchBranchId = usePrevious(watchBranchId);
 
   useEffect(() => {
     const branchId = watchBranchId?.branchId;
-    setUsers(usersJson.filter(pu => pu.branchId === branchId));
+    setUsers(prevUsers => prevUsers.filter(pu => pu.branchId === branchId));
     if(watchBranchId && prevWatchBranchId && !compare(watchBranchId, prevWatchBranchId)) {
       reset({
         ...getValues(),
@@ -66,7 +66,7 @@ const StepTwo = () => {
         isDirty: true, // dirty will not be reset
       })
     }
-  }, [append, getValues, prevWatchBranchId, reset, usersJson, watchBranchId])
+  }, [append, getValues, prevWatchBranchId, reset, watchBranchId])
 
   return (
     <Fragment>
